@@ -1,0 +1,35 @@
+<svg width="120" height="120" xmlns="http://www.w3.org/2000/svg" xml:space="preserve" version="1.1">
+ <desc>Created with Fabric.js 3.6.6</desc>
+
+ <g>
+  <title>Layer 1</title>
+  <g id="svg_1" transform="matrix(1 0 0 1 392.57 227)">
+   <line id="svg_2" fill-rule=" nonzero" fill=" rgb(0,0,0)" stroke-miterlimit="4" stroke-linejoin=" miter" stroke-dashoffset="0" stroke-linecap=" butt" stroke-dasharray=" none" stroke-width="2" stroke=" rgb(0,0,0)" y2="-84.46" x2="-155.14" y1="-84.46" x1="-155.14"/>
+  </g>
+  <g id="svg_3" transform="matrix(1 0 0 1 199.37 134.23)">
+   <g id="svg_4">
+    <g id="svg_5" transform="matrix(1 0 0 1 3.91 39.65)">
+     <path id="svg_6" fill-rule=" nonzero" fill=" rgb(9,97,173)" stroke-miterlimit="4" stroke-linejoin=" miter" stroke-dashoffset="0" stroke-dasharray=" none" stroke=" none" stroke-linecap=" butt" d="m-121.705,-82.368l-25.288,16.8c-3.269,-4.645 -6.365,-9.519 -9.576,-14.279c11.583,-0.229 23.855,0.917 32.858,-5.5l0.229,0l1.777,2.979z"/>
+    </g>
+    <g id="svg_7" transform="matrix(1 0 0 1 3.91 39.65)">
+     <path id="svg_8" fill-rule=" nonzero" fill=" none" stroke-miterlimit="4" stroke-linejoin=" miter" stroke-dashoffset="0" stroke-dasharray=" none" stroke=" rgb(255,255,255)" stroke-linecap=" butt" d="m-121.705,-82.368l-25.288,16.8c-3.269,-4.645 -6.365,-9.519 -9.576,-14.279c11.583,-0.229 23.855,0.917 32.858,-5.5l0.229,0l1.777,2.979z"/>
+    </g>
+    <g id="svg_9" transform="matrix(1 0 0 1 4.1 -16.94)">
+     <path id="svg_10" fill-rule=" nonzero" fill=" rgb(9,97,173)" stroke-miterlimit="4" stroke-linejoin=" miter" stroke-dashoffset="0" stroke-dasharray=" none" stroke=" none" stroke-linecap=" butt" d="m-99.371,-59.721l-43.064,0a2.183,2.183 0 0 0 -1.434,1.778l-35.037,0c-0.287,-12.9 7.168,-24.772 18.637,-31.023a36.094,36.094 0 0 1 14.68,-4.014l24.259,0l21.959,33.259z"/>
+    </g>
+    <g id="svg_11" transform="matrix(1 0 0 1 4.1 -16.94)">
+     <path id="svg_12" fill-rule=" nonzero" fill=" none" stroke-miterlimit="4" stroke-linejoin=" miter" stroke-dashoffset="0" stroke-dasharray=" none" stroke=" rgb(255,255,255)" stroke-linecap=" butt" d="m-99.371,-59.721l-43.064,0a2.183,2.183 0 0 0 -1.434,1.778l-35.037,0c-0.287,-12.9 7.168,-24.772 18.637,-31.023a36.094,36.094 0 0 1 14.68,-4.014l24.259,0l21.959,33.259z"/>
+    </g>
+    <g id="svg_13" transform="matrix(1 0 0 1 -4.01 17.09)">
+     <path id="svg_14" fill-rule=" nonzero" fill=" rgb(0,164,79)" stroke-miterlimit="4" stroke-linejoin=" miter" stroke-dashoffset="0" stroke-dasharray=" none" stroke=" none" stroke-linecap=" butt" d="m-99.283,-93.06a35.1,35.1 0 0 1 -33.317,35.094l-24.256,0.115l-22.134,-33.259l43.352,0c0.745,-0.229 1.09,-1.262 1.434,-1.892l34.921,0l0,-0.058z"/>
+    </g>
+    <g id="svg_15" transform="matrix(1 0 0 1 -4.01 17.09)">
+     <path id="svg_16" fill-rule=" nonzero" fill=" none" stroke-miterlimit="4" stroke-linejoin=" miter" stroke-dashoffset="0" stroke-dasharray=" none" stroke=" rgb(255,255,255)" stroke-linecap=" butt" d="m-99.283,-93.06a35.1,35.1 0 0 1 -33.317,35.094l-24.256,0.115l-22.134,-33.259l43.352,0c0.745,-0.229 1.09,-1.262 1.434,-1.892l34.921,0l0,-0.058z"/>
+    </g>
+    <g id="svg_17" transform="matrix(1 0 0 1 -3.81 -39.56)">
+     <path id="svg_18" fill-rule=" nonzero" fill=" rgb(0,164,79)" stroke-miterlimit="4" stroke-linejoin=" miter" stroke-dashoffset="0" stroke-dasharray=" none" stroke=" rgb(255,255,255)" stroke-linecap=" butt" d="m-121.678,-70.989c-10.494,0.057 -21.963,-1.262 -30.507,4.014l-2.523,1.491l-1.892,-3.1l25.231,-16.856c3.326,4.7 6.539,9.634 9.691,14.451z"/>
+    </g>
+   </g>
+  </g>
+ </g>
+</svg>

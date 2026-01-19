@@ -1,0 +1,135 @@
+# Starter pipeline
+# Start with a minimal pipeline that you can customize to build and deploy your code.
+# Add steps that build, run tests, deploy, and more:
+# https://aka.ms/yaml
+
+name: $(Build.BuildId)-$(SourceBranchName)-$(Date:yyyyMMdd)$(rev:.r)
+
+trigger: none
+
+parameters:
+  - name: desiredVersion
+    type: string
+    displayName: Version
+    default: "1.1.0"
+  - name: testMultipleServerEnabled
+    type: boolean
+    displayName: Enable run integration tests on multiple servers
+    default: true
+
+resources:
+  pipelines:
+    - pipeline: ci-pipeline  # Nombre del pipeline de CI
+      source: 'PortalCorporativoFrontEnd_CI'  # Puedes usar el nombre o ID del pipeline de CI
+      trigger:
+        branches:
+          include:
+            - main
+            - pipeline
+  repositories:
+  - repository: Ansible_Templates
+    type: git
+    name: Pipeline_Templates/Ansible_Templates
+    ref: main
+  - repository: templates
+    type: git
+    name: Pipeline_Templates/Pipeline_Templates
+    ref: main
+
+
+
+variables:
+  - name: application_name
+    value: 'BMSC.Middleware'
+
+lockBehavior: sequential
+extends:
+  template: flow/deploy/multi-stage-node.yml@templates
+  parameters:
+    commonDeployVariableGroup: vg-deploy-common
+    artifactName: drop
+    application_name: $(application_name)
+    desiredVersion: ${{ parameters.desiredVersion }}
+    testOnMultipleServers: ${{ parameters.testMultipleServerEnabled }}
+    ansibleEnable: true
+    AnsibleDirectory: "$(Build.SourcesDirectory)/Ansible_Templates/ansible"
+    inventoryFile: "inventario/inventario.yml"
+    playbookFile: "plantillas/windows/iis_deploy.yml"
+
+    pool:
+      #name: $(poolName)
+      #demands: Agent.Name -equals $(agentName)
+      name: BSCPoolDev01
+      demands: Agent.OS -equals Linux 
+    environments:
+      - name: Dev
+        dependsOn: []
+        environment: DEV
+        deployVariableGroup: vg-common-dev
+
+      - name: QA
+        dependsOn: DeployDev
+        environment: QA
+        deployVariableGroup: vg-common-qa
+
+      - name: PROD
+        dependsOn: DeployQA
+        environment: PROD
+        deployVariableGroup: vg-common-prod
+
+    Applications:
+      - name: portal-comercial-client
+        dependsOn: []
+        server: $(ServerWeb)
+        rol: Web
+        path: "path-client"
+        src_file: "/ansible/repositorio/portal-comercial-client/"
+        dest_file: "C:/inetpub/portalcomercial/webclient"
+        port_https: 8445
+        port_http: 8444
+        certFriendlyName: "AnsibleCertIISWeb"
+        website_name: "Pcomercial-client"
+        website_path: "C:/inetpub/portalcomercial/webclient"
+        backup_path: "C:/Backups/"
+        backup_zip: "{{ backup_path }}/{{ website_name }}_backup_{{ ansible_date_time.iso8601 | regex_replace('[:T-]', '') }}.zip"
+        cert_path: "/path/to/local/certificate.pfx"
+        cert_password: "your_certificate_password"
+        cert_store: "My"
+
+      - name: portal-comercial-api
+        dependsOn: "Web_Deployment"
+        server: $(ServerApi)
+        rol: Api
+        path: "path-api"
+        src_file: "/ansible/repositorio/portal-comercial-api/"
+        dest_file: "C:/inetpub/portalcomercial/api"
+        port_https: 8443
+        port_http: 8442
+        certFriendlyName: "AnsibleCertIISApi"
+        website_name: "Pcomercial-api"
+        website_path: "C:/inetpub/portalcomercial/api"
+        backup_path: "C:/Backups"
+        backup_zip: "{{ backup_path }}/{{ website_name }}_backup_{{ ansible_date_time.iso8601 | regex_replace('[:T-]', '') }}.zip"
+        cert_path: "/path/to/local/certificate.pfx"
+        cert_password: "your_certificate_password"
+        cert_store: "My"
+
+#      - task: PowerShellOnTargetMachines@3
+#        inputs:
+#          Machines: 'SRVQACGOWB01'
+#          UserName: '$(user)'
+#          UserPassword: '$(pass)'
+#          InlineScript: |
+#            # Write your powershell commands here.
+            
+#            Write-Output "Hello World"
+#            hostname
+
+#      - task: WindowsMachineFileCopy@2
+#        inputs:
+#          SourcePath: '$(Build.SourcesDirectory)\pipeline'
+#          MachineNames: 'SRVQACGOWB01'
+#          AdminUserName: '$(user)'
+#          AdminPassword: '$(pass)'
+#          TargetPath: 'C:\Release\test001'
+#          CleanTargetBeforeCopy: true
