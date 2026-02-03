@@ -1,0 +1,97 @@
+# Node.js
+# Build a general Node.js project with npm.
+# Add steps that analyze code, save build artifacts, deploy, and more:
+# https://docs.microsoft.com/azure/devops/pipelines/languages/javascript
+---
+trigger: none
+
+resources:
+  repositories:
+    - repository: Pipeline_Templates
+      type: git
+      name: Pipeline_Templates/Pipeline_Templates  
+      ref: refs/heads/main  
+    
+pool:
+ # vmImage: ubuntu-latest
+ # vmImage: windows-latest
+  name: BSCPoolDev01
+ # demands: Agent.OS -equals Linux
+
+
+stages:
+
+  - stage: DevSecOps
+    displayName: SecOps
+    jobs:
+      - job: MSDO
+        displayName: Microsoft Security DevOps
+        pool:
+          vmImage: windows-latest
+          #vmImage: ubuntu-latest
+          #name: DevSecOps
+          #demands: Agent.ComputerName -equals LOVCDC008
+        steps:
+          - checkout: self
+            clean: true
+            persistCredentials: true
+            fetchDepth: 0
+
+          - template: 'blocks/trivy/msdo.yaml@Pipeline_Templates'
+            parameters:
+              sonarqube_sc: "SC-SONARQUBE"
+
+      - job: Sonar
+        displayName: Sonar Analysis
+        pool:
+          name: BSCPoolDev01
+          demands: Agent.Name -equals DEVDAGNT_001
+        steps:
+          - checkout: self
+            fetchDepth: 0
+
+          - template: 'flow/build/node_sonar.yml@Pipeline_Templates' 
+            parameters:
+              sonarqube_inclusions: ''
+              sonarqube_sc: "SC-SONARQUBE"
+              sonarqube_projectKey: $(SONAR_PROJECT_KEY)
+              sonarqube_projectName: $(SONAR_PROJECT_NAME)
+              sonarqube_enabled: true
+              version: "1.0"
+
+
+  - stage: Build
+    displayName: Build Proyect
+    dependsOn: DevSecOps
+    
+    jobs:
+
+    - job: Build
+      pool:
+        name: BSCPoolDev01
+        demands: Agent.OS -equals Linux
+      steps:
+      - checkout: self 
+        clean: true
+        fetchDepth: 0
+        persistCredentials: true
+
+      - template: 'flow/build/node.yml@Pipeline_Templates' 
+        parameters:
+          pool:
+            #vmImage: ubuntu-latest
+            vmImage: windows-latest
+            name: BSCPoolDev01
+            demands: Agent.Name -equals DEVDAGNT_001
+          application_name:  $(Build.Repository.Name)
+          workingDirectory: $(Build.SourcesDirectory)
+          version: "0.1.3"
+          nodeVersion: $(nodeVersion)
+          enable_yarn: true
+          #enable_npm: true
+          buildFolder: $(buildFolder)
+          artifactName: $(artifactName)
+          publishLocation: 'Container'
+          triggerBranch: 'develop'
+          strategy: 'CI'
+          #BuildConfiguration: $(BuildConfiguration)

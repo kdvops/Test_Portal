@@ -1,0 +1,27 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="250" height="250" viewBox="0 0 250 250">
+  <!-- Background -->
+  <rect width="100%" height="100%" fill="#f2f2f2" rx="12"></rect>
+
+  <!-- Accordion section 1 (closed) -->
+  <g>
+    <rect x="20" y="30" width="210" height="40" fill="#cccccc" rx="6"></rect>
+    <polygon points="200,48 210,38 220,48" fill="#777"></polygon>
+  </g>
+
+  <!-- Accordion section 2 (open) -->
+  <g>
+    <rect x="20" y="80" width="210" height="120" fill="#e0e0e0" rx="6"></rect>
+    <polygon points="200,98 210,108 220,98" fill="#777"></polygon>
+    
+    <!-- Content lines -->
+    <rect x="30" y="110" width="180" height="6" fill="#bbbbbb" rx="3"></rect>
+    <rect x="30" y="130" width="160" height="6" fill="#bbbbbb" rx="3"></rect>
+    <rect x="30" y="150" width="140" height="6" fill="#bbbbbb" rx="3"></rect>
+  </g>
+
+  <!-- Accordion section 3 (closed) -->
+  <g>
+    <rect x="20" y="210" width="210" height="40" fill="#cccccc" rx="6"></rect>
+    <polygon points="200,228 210,218 220,228" fill="#777"></polygon>
+  </g>
+</svg>

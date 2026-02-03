@@ -1,0 +1,17 @@
+{
+  "cSpell.words": ["bodyparser", "Prouser", "QLJSON"],
+
+  "editor.defaultFormatter": "dbaeumer.vscode-eslint",
+
+  "editor.codeActionsOnSave": {
+    "source.fixAll.eslint": "explicit"
+  },
+
+  "eslint.format.enable": true,
+  "eslint.validate": ["javascript", "typescript"],
+
+  // 👇 tsconfig.json is JSONC, so use Prettier there
+  "[jsonc]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  }
+}

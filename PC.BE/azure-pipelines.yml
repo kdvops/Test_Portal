@@ -1,0 +1,72 @@
+# Node.js
+# Build a general Node.js project with npm.
+# Add steps that analyze code, save build artifacts, deploy, and more:
+# https://docs.microsoft.com/azure/devops/pipelines/languages/javascript
+
+trigger: none
+#- main
+
+pool:
+  vmImage: ubuntu-latest
+
+variables:
+  - group: BMSC_Artifact_token
+
+steps:
+- task: NodeTool@0
+  inputs:
+    versionSpec: '20.x'
+  displayName: 'Install Node.js'
+
+- task: replacetokens@6
+  inputs:
+    root: '$(System.DefaultWorkingDirectory)'
+    sources: |
+      .npmrc
+      .npmrc.template
+    recursive: true
+
+- script: |
+    mv .npmrc.template .npmrc
+    pwd
+    ls -lrta
+  displayName: 'rename .npmrc'
+
+- script: |
+    npm install --prefer-dedupe
+    npm install -g yarn-deduplicate
+    yarn-deduplicate
+  displayName: 'install deduplicate'
+
+
+- task: npmAuthenticate@0
+  enabled: false
+  inputs:
+    feedUrl: 'https://pkgs.dev.azure.com/BMSC/_packaging/BMSC_Node/npm/registry/'
+    workingFile: '.npmrc'
+    customEndpoint: 'ArtifactSC'
+
+- script: |
+    yarn install --frozen-lockfile --non-interactive
+    yarn install --non-interactive
+    #npm install
+    npm run build
+    npm version patch --no-git-tag-version
+  displayName: 'npm install and build'
+
+
+- task: Npm@1
+  enabled: false
+  inputs:
+    command: 'publish'
+    workingDir: '$(System.DefaultWorkingDirectory)'
+    verbose: true
+    publishRegistry: 'useFeed'
+    publishFeed: '209b22dc-6153-409f-91e9-c0372426e303'
+
+- task: PublishPipelineArtifact@1
+  inputs:
+    #targetPath: '$(Pipeline.Workspace)/yarn.lock'
+    targetPath: '$(System.DefaultWorkingDirectory)/yarn.lock'
+    artifact: 'lock'
+    publishLocation: 'pipeline'

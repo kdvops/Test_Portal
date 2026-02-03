@@ -1,0 +1,233 @@
+# Node.js
+# Build a general Node.js project with npm.
+# Add steps that analyze code, save build artifacts, deploy, and more:
+# https://docs.microsoft.com/azure/devops/pipelines/languages/javascript
+---
+name: $(Build.BuildId)-$(SourceBranchName)-$(Date:yyyyMMdd)$(rev:.r)
+
+trigger:
+  branches:
+    include:
+      - develop
+      - release/*
+      - main
+  paths:
+    include:
+      - src/**
+      - ansible/**
+      - test/**
+      - '*'
+    exclude:
+      - docs/**
+      - pipeline/**
+      - README.md
+      - ecosystem.config.cjs
+      - .env.template
+      - .npmrc.template
+      - .gitignore
+      - gitversion.yml
+
+pr:
+  branches:
+    include:
+      - develop
+      - main
+      - release/*
+
+schedules:
+- cron: "5 6 * * *"   # min, hour, day of m, month, week
+  displayName: Nightly build
+  branches:
+    include:
+      - main
+      - develop
+  always: true
+
+parameters:
+  - name: scan
+    displayName: "scan"
+    type: boolean
+    default: true
+  - name: desiredVersion
+    type: string
+    displayName: Version
+    default: "1.1.0"
+  - name: testMultipleServerEnabled
+    type: boolean
+    displayName: Enable run integration tests on multiple servers
+    default: true
+  - name: private_registry
+    displayName: "Azure Artifacts ?"
+    type: boolean
+    default: true
+  - name: terraEnable_gen
+    displayName: "Usar Terraform ?"
+    type: boolean
+    default: false
+  - name: nodeVersion
+    displayName: "Version de Node ?"
+    type: string
+    default: 22.21.1
+    values:
+    - 20.19.6
+    - 22.21.1
+    - 24.12.0
+    - 25.2.1
+    
+resources:
+  repositories:
+    - repository: templates
+      type: git
+      name: Pipeline_Templates/Pipeline_Templates
+      ref: main
+    - repository: InfraStructura
+      type: git
+      name: FabricaDigital/BSC.PortalCorporativo.Infra
+      ref: main
+    - repository: Ansible_Templates
+      type: git
+      name: Pipeline_Templates/Ansible_Templates
+      ref: main
+    - repository: scripts
+      type: git
+      name: Pipeline_Templates/powershell_scripts
+      ref: main
+  
+variables:
+  - group: vg-nodeJS-common
+  - group: vg-deploy-common
+  - group: vg-Mail-vars
+  - group: BMSC_Artifact_token
+  - group: SQ_TOKEN_GATEWAY
+  - group: InfraEstructura_Dev
+  #- group: IaC_Fenix
+
+  - name: application_name
+    value: "$(Build.Repository.Name)"
+  - name: application_path
+    value: "/opt/$(Build.Repository.Name)"
+  - name: src_build
+    value: /ansible/artifacts
+  - name: tmp_build
+    value: '/tmp/tmp_build'
+  - name: build_file
+    value: "$(Build.Repository.Name).zip"
+  - name: backup_path
+    value: '/tmp/backup'
+  - name: pm2_file
+    value: 'dist/main.js'
+  - name: pm2_name
+    value: "$(Build.Repository.Name)"
+  - name: nginx_reverse_path
+    value: '/'
+  - name: nginx_reverse_port
+    value: 3050
+  - name: node_port
+    value: 3000
+  - name: nginx_port
+    value: 443
+  - name: graphql_port
+    value: 3050
+  - name: rol
+    value: app
+
+lockBehavior: sequential
+extends:
+  template: flow/deploy/multi-stage-node.yml@templates
+  parameters:
+    commonDeployVariableGroup: vg-deploy-common
+    artifactName: drop
+    application_name: "$(Build.Repository.Name)"
+    application_path: "/opt/$(Build.Repository.Name)"
+    terraDirectory: "$(Agent.BuildDirectory)/Ansible_Templates/Terraform/"
+    #terraEnable: ${{ eq(variables['terraEnable'], 'true') }}
+    terravarFile: "terraform.tfvar"
+    ansibleEnable: true
+    AnsibleDirectory: "$(Agent.BuildDirectory)/Ansible_Templates/ansible/"
+    inventoryFile: "inventario/inventario.yml"
+    playbookFile: "plantillas/linux/node_cd.yml"
+    desiredVersion: ${{ parameters.desiredVersion }}
+    binariesArtifactName: $(Build.Repository.Name)
+    testOnMultipleServers: ${{ parameters.testMultipleServerEnabled }}
+    private_registry: ${{ parameters.private_registry }}
+    terraEnable_gen: ${{ parameters.terraEnable_gen }}
+    pipelineId: "162"
+    ConfigFIle: "apollo/default.ts"
+    nodeVersion: ${{ parameters.nodeVersion }}
+    scan: ${{ parameters.scan }}
+
+    #pool:
+    #  name: $(poolName)
+    #  demands: Agent.Name -equals $(agentName)
+    environments:
+      - name: DEV
+        dependsOn: Sonar
+        server: $(ServerApi)
+        serverApp: $(ServerApi)
+        cert_self_sign: true
+        terraEnable: true
+        terradestroy: true
+        deployVariableGroup: vg-common-dev
+        vg_app: vg-PortalCorporativo-deploy-Dev
+        AgentPool: BSCPoolQA01
+        AgentName: BuildAgent001
+        infra_pool:
+          name: BSCPoolQA01
+          demands: Agent.ComputerName -equals LOVCDC008
+        #build_pool: 
+        #  vmImage: ubuntu-latest
+        build_pool:
+          name: $(build_pool)
+          demands: Agent.ComputerName -equals $(build_agent)
+        deploy_pool:
+          name: BSCPoolDev01
+          demands: Agent.ComputerName -equals srvqadyp04
+        #azureSubscription: $(azureSubscription)
+
+      - name: QA
+        dependsOn: Sonar 
+        server: $(ServerApi)
+        serverApp: $(ServerApi)
+        cert_self_sign: true
+        terraEnable: true
+        terradestroy: true
+        deployVariableGroup: vg-common-qa
+        vg_app: vg-PortalCorporativo-deploy-QA
+        AgentPool: BSCPoolQA01
+        AgentName: BuildAgent001
+        infra_pool:
+          name: BSCPoolQA01
+          demands: Agent.ComputerName -equals LOVCDC008
+        #build_pool: 
+        #  vmImage: ubuntu-latest
+        build_pool:
+          name: $(build_pool)
+          demands: Agent.ComputerName -equals $(build_agent)
+        deploy_pool:
+          name: BSCPoolDev01
+          demands: Agent.ComputerName -equals srvqadyp04
+        #azureSubscription: $(azureSubscription)
+
+      - name: PROD
+        dependsOn: Sonar
+        server: $(ServerApi)
+        serverApp: $(ServerApi)
+        cert_self_sign: false
+        terraEnable: false
+        terradestroy: false
+        deployVariableGroup: vg-common-prod
+        vg_app: vg-PortalCorporativo-deploy-PROD
+        AgentPool: BSCPoolQA01
+        AgentName: AgentWQA01
+        infra_pool:
+          name: BSCPoolQA01
+          demands: Agent.ComputerName -equals LOVCDC008
+        #build_pool: 
+        #  vmImage: ubuntu-latest
+        build_pool:
+          name: $(build_pool)
+          demands: Agent.ComputerName -equals $(build_agent)
+        deploy_pool:
+          name: BSCPoolProd01
+          demands: Agent.ComputerName -equals lovsrvazp01
+        #azureSubscription: $(azureSubscription)

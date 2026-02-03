@@ -1,0 +1,3401 @@
+# ------------------------------------------------------
+# THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
+# ------------------------------------------------------
+
+type User {
+  _id: ID!
+  firstName: String!
+  lastName: String!
+  email: String!
+  displayName: String!
+  avatar: String!
+  address: String!
+  country: String!
+  birthday: DateTime!
+  phone: String!
+  rate: Float!
+  password: String!
+  roles: [String!]!
+  createdAt: DateTime!
+  updatedAt: DateTime!
+  deletedAt: DateTime
+}
+
+type UserType {
+  _id: ID!
+  firstName: String!
+  lastName: String!
+  email: String!
+  displayName: String!
+  avatar: String!
+  address: String!
+  country: String!
+  birthday: DateTime!
+  phone: String!
+  rate: Float!
+  password: String!
+  roles: [String!]!
+  createdAt: DateTime!
+  updatedAt: DateTime!
+  deletedAt: DateTime
+}
+
+type Token {
+  access_token: String!
+  expired_in: Float!
+  token_type: String!
+}
+
+type LoginResponse {
+  token: Token!
+}
+
+type FeaturesType {
+  text: String!
+  align: String!
+  size: String!
+  color: String!
+  weight: String!
+}
+
+type FeaturesButtonType {
+  enabled: Boolean!
+  link: String!
+  text: String!
+  align: String!
+  color: String!
+  weight: String!
+  background: String!
+}
+
+type ImageDetailType {
+  image: String!
+  altText: String
+  isCover: Boolean
+  _id: ObjectId
+}
+
+type CardsSectionType {
+  _id: ID!
+  name: String!
+  link: String
+  description: String!
+  picture: String
+  pictureImageDetail: ImageDetailType
+}
+
+type ButtonComponentType {
+  text: String
+  href: String
+  color: String
+  icon: String
+  picture: String
+  pictureImageDetail: ImageDetailType
+  iconImageDetail: ImageDetailType
+}
+
+type TextComponentType {
+  text: String
+  color: String
+}
+
+type LayoutType {
+  _id: String
+  i: String
+  x: Float
+  y: Float
+  w: Float
+  h: Float
+  image: String
+  imageDetail: ImageDetailType
+  button: ButtonComponentType
+  text: TextComponentType
+  type: GridElementType
+  style: [GridElementStyle!]
+  list: [String!]
+}
+
+enum GridElementType {
+  text
+  button
+  image
+  list
+}
+
+enum GridElementStyle {
+  sizeSmall
+  sizeMedium
+  sizeLarge
+  weightNormal
+  weightBold
+  alignLeft
+  alignCenter
+  alignRight
+  badgeTopLeft
+  badgeTopRight
+  borderNormal
+  borderShadow
+}
+
+type GalleryItemType {
+  _id: String
+  title: String
+  image: String
+  icon: String
+  imageDetail: ImageDetailType
+  iconImageDetail: ImageDetailType
+  video: String
+}
+
+type ListItemType {
+  _id: String
+  title: String!
+  content: String!
+}
+
+type GridSectionType {
+  _id: String
+  layouts: [LayoutType!]
+  breakLine: Boolean
+  columns: Float!
+  rows: Float!
+  rowHeight: Float
+  badge: String
+  color: String
+  border: String
+  style: [GridStyle!]
+  cardSize: StyleSection
+}
+
+enum GridStyle {
+  sizeXSmall
+  sizeSmall
+  sizeMedium
+  sizeLarge
+  sizeXLarge
+  styleFlat
+  styleShadow
+  orientationNormal
+  orientationLandscape
+  orientationLarged
+}
+
+enum StyleSection {
+  cardsXSmall
+  cardsSmall
+  cardsMedium
+  cardsLarge
+  cardsXLarge
+  bannerMedium
+  bannerLarge
+  attachmentsMedium
+  attachmentsLarge
+  imageSmall
+  imageMedium
+  imageLarge
+  imageCover
+  textMedium
+  textLarge
+  videoMedium
+  videoLarge
+  tableSmall
+  tableMedium
+  tableLarge
+}
+
+type GallerySectionType {
+  items: [GalleryItemType!]
+}
+
+type ListSectionType {
+  items: [ListItemType!]
+}
+
+type TextBannerSectionType {
+  text: String!
+  color: String!
+}
+
+type ButtonBannerSectionType {
+  text: String!
+  color: String!
+  link: String!
+  background: String!
+  enabled: Boolean!
+}
+
+type BannerSectionType {
+  _id: ID!
+  title: TextBannerSectionType
+  description: TextBannerSectionType
+  background: String
+  button: ButtonBannerSectionType!
+  picture: String
+  pictureImageDetail: ImageDetailType
+}
+
+type ImageSectionType {
+  _id: ID
+  url: String!
+}
+
+type AttachmentSectionType {
+  _id: ID!
+  name: String!
+  description: String!
+  file: String!
+}
+
+type TableColumnsSectionType {
+  name: String!
+  value: String!
+}
+
+type TableSectionType {
+  headers: [String!]!
+  columns: [[TableColumnsSectionType!]!]!
+}
+
+type Sections {
+  _id: ID!
+  name: String
+  description: String
+  color: String!
+  position: Float!
+  style: StyleSection!
+  type: TypeSection!
+  cards: [CardsSectionType!]
+  banner: BannerSectionType
+  table: TableSectionType
+  attachments: [AttachmentSectionType!]
+  image: ImageSectionType
+  imageDetail: ImageDetailType
+  video: String
+  text: String
+  grids: [GridSectionType!]
+  gallery: GallerySectionType
+  accordion: ListSectionType
+  createdAt: DateTime!
+  updatedAt: DateTime!
+  deletedAt: DateTime
+}
+
+enum TypeSection {
+  sectionCards
+  sectionAttachments
+  sectionBanner
+  sectionImage
+  sectionText
+  sectionVideo
+  sectionTable
+  sectionGrids
+  sectionGallery
+  sectionAccordion
+}
+
+type Targets {
+  _id: ID!
+  status: StatusItem
+  name: String!
+  icon: String!
+  color: String!
+  description: String!
+  featured: GlobalPositionsFreatured!
+  slug: String
+  sections: [ID!]!
+  showPosts: Boolean!
+  showCategories: Boolean!
+  disabled: Boolean!
+  relatedTargets: [ID!]
+  createdAt: DateTime!
+  updatedAt: DateTime!
+  deletedAt: DateTime
+}
+
+enum StatusItem {
+  publish
+  trash
+  draft
+}
+
+enum GlobalPositionsFreatured {
+  hidden
+  menu
+  menuExpanded
+  footer
+  sidebar
+  mainContent
+  recommended
+}
+
+type Sliders {
+  _id: ID!
+  title: FeaturesType!
+  subtitle: FeaturesType!
+  description: FeaturesType!
+  button: FeaturesButtonType!
+  targetID: ID
+  path: String!
+  picture: String
+  responsive: String
+  pictureImageDetail: ImageDetailType
+  responsiveImageDetail: ImageDetailType
+  disabled: Boolean!
+  target: String
+  altTextPicture: String
+  caption: String
+  order: Float
+  position: Float
+  expirationDate: DateTime
+  createdAt: DateTime!
+  updatedAt: DateTime!
+  deletedAt: DateTime
+}
+
+type DateRangeType {
+  start: DateTime!
+  end: DateTime!
+}
+
+type Promotions {
+  _id: ID!
+  status: StatusItem
+  name: String!
+  percent: String!
+  devolution: String!
+  condition: String!
+  extract: String!
+  disabled: Boolean!
+  picture: String
+  pictureImageDetail: ImageDetailType
+  date: DateRangeType!
+  createdAt: DateTime!
+  updatedAt: DateTime!
+  deletedAt: DateTime
+}
+
+type PromotionByMonth {
+  promotions: [Promotions!]!
+  createdAt: String!
+}
+
+type FeaturesCategoryType {
+  feature: String!
+  values: [String!]!
+}
+
+type PicturesCategoryType {
+  responsive: String
+  banner: String
+  thumbnail: String
+  bannerImageDetail: ImageDetailType
+  responsiveImageDetail: ImageDetailType
+  thumbnailImageDetail: ImageDetailType
+}
+
+type Categories {
+  _id: ID!
+  status: StatusItem
+  name: String!
+  excerpt: String!
+  slug: String
+  features: [FeaturesCategoryType!]!
+  description: String!
+  tags: [String!]!
+  parentID: ID
+  parentTarget: TargetParentCategories
+  pictures: PicturesCategoryType!
+  disabled: Boolean!
+  target: TargetCategories
+  targetID: ID
+  relatedCategories: [ID!]
+  relatedTargets: [ID!]
+  slugHistory: [String!]
+  createdAt: DateTime!
+  updatedAt: DateTime!
+  deletedAt: DateTime
+}
+
+enum TargetParentCategories {
+  categoryGlobal
+  categoryCards
+  categoryAccounts
+  categoryLoans
+  categoryDeposits
+  categoryPointsBSC
+}
+
+enum TargetCategories {
+  categoryProfits
+  categoryPodcast
+  categoryProducts
+  categoryAboutUs
+  categoryBusiness
+  categoryEnterprise
+  categoryChannels
+  categoryInsurance
+  categoryProuser
+  categoryAdjudicated
+}
+
+type CategoriesByParent {
+  parent: String
+  subcategories: [Categories!]!
+}
+
+type CategoriesAndSubcategories {
+  altTextBanner: String
+  altTextThumbnail: String
+  altTextResponsive: String
+  metaTitle: String
+  metaDescription: String
+  keywords: [String!]
+  canonicalUrl: String
+  tags: [String!]
+  ogImage: String
+  twitterImage: String
+  socialTitle: String
+  socialDescription: String
+  altText: String
+  readingTime: Float
+  robotsDirectives: String
+  language: String
+  structuredType: String
+  focusKeyword: String
+  isFeatured: Boolean
+  schemaMarkup: String
+  relatedPosts: [String!]
+  _id: String!
+  status: StatusItem
+  name: String!
+  excerpt: String!
+  description: String!
+  slug: String
+  parentTarget: String
+  target: String
+  targetID: String
+  parentID: String
+  subcategories: [Categories!]
+  pictures: PicturesCategoryType!
+  disabled: Boolean!
+  relatedCategories: [String!]
+  relatedTargets: [String!]
+  slugHistory: [String!]
+  createdAt: DateTime
+  updatedAt: DateTime
+  deletedAt: DateTime
+}
+
+type DateRangeProfitType {
+  start: DateTime!
+  end: DateTime!
+}
+
+type DescriptionLargeProfitType {
+  text: String!
+  enabled: Boolean!
+}
+
+type Profits {
+  _id: ID!
+  status: StatusItem
+  name: String!
+  description: DescriptionLargeProfitType!
+  category: String!
+  color: String!
+  percent: String!
+  devolution: String!
+  condition: String!
+  disabled: Boolean!
+  picture: String
+  pictureImageDetail: ImageDetailType
+  date: DateRangeProfitType!
+  createdAt: DateTime!
+  updatedAt: DateTime!
+  deletedAt: DateTime
+}
+
+type ProfitsGroupByCategoryDto {
+  profits: [Profits!]!
+  category: Categories!
+}
+
+type Podcast {
+  _id: ID!
+  title: String!
+  description: String!
+  slug: String
+  season: String!
+  cover: String
+  coverImageDetail: ImageDetailType
+  link: String!
+  disabled: Boolean!
+  status: StatusItem
+  createdAt: DateTime!
+  updatedAt: DateTime!
+  deletedAt: DateTime
+}
+
+type EpisodePodcastGroupBySeason {
+  episodes: [Podcast!]!
+  season: Categories!
+}
+
+type Products {
+  _id: ID!
+  status: StatusItem
+  name: String!
+  description: String!
+  slug: String
+  category: String!
+  sections: [String!]!
+  banner: String
+  thumbnail: String
+  responsive: String
+  bannerImageDetail: ImageDetailType
+  thumbnailImageDetail: ImageDetailType
+  responsiveImageDetail: ImageDetailType
+  link: String!
+  disabled: Boolean!
+  createdAt: DateTime!
+  updatedAt: DateTime!
+  deletedAt: DateTime
+}
+
+type ProductsByParentTarget {
+  _id: String!
+  status: StatusItem
+  name: String!
+  description: String!
+  slug: String
+  category: Categories!
+  banner: String
+  thumbnail: String
+  responsive: String
+  bannerImageDetail: ImageDetailType
+  thumbnailImageDetail: ImageDetailType
+  responsiveImageDetail: ImageDetailType
+  link: String
+  disabled: Boolean
+  sections: [Sections!]!
+}
+
+type PriceCoins {
+  buy: String!
+  sell: String!
+}
+
+type Coins {
+  _id: ID!
+  name: String!
+  price: PriceCoins!
+  prefix: String!
+  logo: String
+  logoImageDetail: ImageDetailType
+  createdAt: DateTime!
+  updatedAt: DateTime!
+  deletedAt: DateTime
+}
+
+type WorkHoursRangeType {
+  day: String!
+  start: String!
+  end: String!
+}
+
+type Locations {
+  _id: ID!
+  label: String!
+  type: TypeLocation!
+  address: String!
+  city: String!
+  latitude: String!
+  longitude: String!
+  hours: [WorkHoursRangeType!]!
+  createdAt: DateTime!
+  updatedAt: DateTime!
+  deletedAt: DateTime
+}
+
+enum TypeLocation {
+  locationBranches
+  locationAth
+  locationAutoBank
+  locationSubAgents
+}
+
+type SocialType {
+  x: String
+  facebook: String
+  linkedin: String
+  instagram: String
+}
+
+type AuthorType {
+  _id: ID
+  name: String!
+  position: String!
+  image: ImageDetailType
+  socials: SocialType
+  biography: String
+}
+
+type Financially {
+  _id: ID!
+  title: String!
+  slug: String!
+  excerpt: String!
+  subtitle: String!
+  description: String!
+  type: TypePostFinancially!
+  sections: [String!]!
+  banner: String
+  thumbnail: String
+  responsive: String
+  bannerImageDetail: ImageDetailType
+  thumbnailImageDetail: ImageDetailType
+  responsiveImageDetail: ImageDetailType
+  file: String!
+  disabled: Boolean!
+  status: StatusItem
+  relatedPosts: [String!]
+  isFeatured: Boolean
+  schemaMarkup: String
+  pinnedAt: DateTime
+  createdAt: DateTime!
+  updatedAt: DateTime!
+  deletedAt: DateTime
+  authors: [AuthorType!]
+}
+
+enum TypePostFinancially {
+  postArticle
+  postRelease
+  postEvents
+}
+
+type FinanciallyByGroupType {
+  type: String!
+  financially: [FinanciallyPostType!]!
+}
+
+type FinanciallyPostType {
+  altTextBanner: String
+  altTextThumbnail: String
+  altTextResponsive: String
+  metaTitle: String
+  metaDescription: String
+  keywords: [String!]
+  canonicalUrl: String
+  tags: [String!]
+  ogImage: String
+  twitterImage: String
+  socialTitle: String
+  socialDescription: String
+  altText: String
+  readingTime: Float
+  robotsDirectives: String
+  language: String
+  structuredType: String
+  focusKeyword: String
+  isFeatured: Boolean
+  schemaMarkup: String
+  relatedPosts: [String!]
+  _id: ID!
+  title: String!
+  slug: String
+  excerpt: String!
+  subtitle: String!
+  description: String!
+  type: String!
+  banner: String
+  thumbnail: String
+  responsive: String
+  bannerImageDetail: ImageDetailType
+  thumbnailImageDetail: ImageDetailType
+  responsiveImageDetail: ImageDetailType
+  file: String!
+  status: StatusItem
+  disabled: Boolean
+  sections: [Sections!]!
+  createdAt: DateTime!
+  pinnedAt: DateTime
+  authors: [AuthorType!]
+}
+
+type FinanciallyPostPagination {
+  currentPage: Int!
+  items: [FinanciallyPostType!]!
+  totalItems: Int!
+  itemsPerPage: Int!
+}
+
+type ButtonCardShortcutType {
+  text: String!
+  color: String!
+  link: String!
+  background: String!
+  enabled: Boolean!
+}
+
+type TextCardShortcutType {
+  text: String!
+  color: String!
+}
+
+type CardShortcutType {
+  _id: ID!
+  title: TextCardShortcutType!
+  description: TextCardShortcutType!
+  style: StyleCardShortcut!
+  align: StyleAlignShortcut
+  picture: String
+  pictureImageDetail: ImageDetailType
+  background: String!
+  button: ButtonCardShortcutType!
+  icon: String!
+}
+
+enum StyleCardShortcut {
+  cardsShortcutSmall
+  cardsShortcutMedium
+  cardsShortcutLarge
+}
+
+enum StyleAlignShortcut {
+  alignLeft
+  alignCenter
+  alignRight
+}
+
+type Shortcuts {
+  _id: ID!
+  name: String!
+  icon: String!
+  color: String!
+  background: String!
+  disabled: Boolean
+  type: TypeShortcut!
+  target: TargetShortcut
+  targetID: ID
+  cards: [CardShortcutType!]!
+  createdAt: DateTime!
+  updatedAt: DateTime!
+  deletedAt: DateTime
+}
+
+enum TypeShortcut {
+  shortcutTabs
+  shortcutCards
+}
+
+enum TargetShortcut {
+  targetHome
+  targetBusiness
+  targetEnterprise
+  targetInsurance
+}
+
+type ShortcutsGroupByTarget {
+  target: String
+  shortcuts: [Shortcuts!]!
+}
+
+type Business {
+  _id: ID!
+  status: StatusItem
+  title: String!
+  slug: String!
+  link: String!
+  excerpt: String!
+  subtitle: String!
+  description: String!
+  category: String!
+  sections: [String!]!
+  banner: String
+  thumbnail: String
+  responsive: String
+  bannerImageDetail: ImageDetailType
+  thumbnailImageDetail: ImageDetailType
+  responsiveImageDetail: ImageDetailType
+  disabled: Boolean!
+  createdAt: DateTime!
+  updatedAt: DateTime!
+  deletedAt: DateTime
+}
+
+type BusinessByGroupType {
+  category: Categories!
+  business: [BusinessPostType!]!
+}
+
+type BusinessPostType {
+  _id: ID!
+  status: StatusItem
+  title: String!
+  slug: String
+  link: String
+  excerpt: String!
+  subtitle: String!
+  description: String!
+  category: Categories!
+  banner: String
+  thumbnail: String
+  responsive: String
+  bannerImageDetail: ImageDetailType
+  thumbnailImageDetail: ImageDetailType
+  responsiveImageDetail: ImageDetailType
+  disabled: Boolean
+  sections: [Sections!]!
+  createdAt: DateTime!
+}
+
+type Regulatory {
+  _id: ID!
+  title: String!
+  slug: String!
+  link: String!
+  excerpt: String!
+  subtitle: String!
+  description: String!
+  category: String!
+  sections: [String!]!
+  banner: String!
+  thumbnail: String
+  responsive: String
+  bannerImageDetail: ImageDetailType
+  thumbnailImageDetail: ImageDetailType
+  responsiveImageDetail: ImageDetailType
+  disabled: Boolean!
+  status: StatusItem
+  createdAt: DateTime!
+  updatedAt: DateTime!
+  deletedAt: DateTime
+}
+
+type RegulatoryByGroupType {
+  category: Categories!
+  regulatory: [RegulatoryPostType!]!
+}
+
+type RegulatoryPostType {
+  _id: ID!
+  title: String!
+  slug: String
+  link: String
+  excerpt: String!
+  subtitle: String!
+  description: String!
+  category: Categories!
+  banner: String
+  thumbnail: String
+  responsive: String
+  bannerImageDetail: ImageDetailType
+  thumbnailImageDetail: ImageDetailType
+  responsiveImageDetail: ImageDetailType
+  status: StatusItem
+  disabled: Boolean
+  sections: [Sections!]!
+  createdAt: DateTime!
+}
+
+type Enterprise {
+  _id: ID!
+  status: StatusItem
+  title: String!
+  slug: String!
+  excerpt: String!
+  link: String!
+  subtitle: String!
+  description: String!
+  category: String!
+  sections: [String!]!
+  banner: String
+  thumbnail: String
+  responsive: String
+  bannerImageDetail: ImageDetailType
+  thumbnailImageDetail: ImageDetailType
+  responsiveImageDetail: ImageDetailType
+  disabled: Boolean!
+  createdAt: DateTime!
+  updatedAt: DateTime!
+  deletedAt: DateTime
+}
+
+type EnterpriseByGroupType {
+  category: Categories!
+  enterprise: [EnterprisePostType!]!
+}
+
+type EnterprisePostType {
+  _id: ID!
+  status: StatusItem
+  title: String!
+  slug: String
+  excerpt: String!
+  subtitle: String!
+  link: String
+  description: String!
+  category: Categories!
+  banner: String
+  thumbnail: String
+  responsive: String
+  bannerImageDetail: ImageDetailType
+  thumbnailImageDetail: ImageDetailType
+  responsiveImageDetail: ImageDetailType
+  disabled: Boolean
+  sections: [Sections!]!
+  createdAt: DateTime!
+}
+
+type Insurance {
+  _id: ID!
+  title: String!
+  slug: String!
+  link: String!
+  excerpt: String!
+  subtitle: String!
+  description: String!
+  category: String!
+  sections: [String!]!
+  banner: String
+  thumbnail: String
+  responsive: String
+  bannerImageDetail: ImageDetailType
+  thumbnailImageDetail: ImageDetailType
+  responsiveImageDetail: ImageDetailType
+  disabled: Boolean!
+  status: StatusItem
+  createdAt: DateTime!
+  updatedAt: DateTime!
+  deletedAt: DateTime
+}
+
+type InsuranceByGroupType {
+  category: Categories!
+  insurance: [InsurancePostType!]!
+}
+
+type InsurancePostType {
+  _id: ID!
+  title: String!
+  slug: String
+  link: String
+  excerpt: String!
+  subtitle: String!
+  description: String!
+  category: Categories!
+  banner: String
+  thumbnail: String
+  responsive: String
+  bannerImageDetail: ImageDetailType
+  thumbnailImageDetail: ImageDetailType
+  responsiveImageDetail: ImageDetailType
+  status: StatusItem
+  disabled: Boolean
+  sections: [Sections!]!
+  createdAt: DateTime!
+}
+
+type TermsAndConditionFormsType {
+  text: String!
+  enabled: Boolean!
+  accept: Boolean!
+}
+
+type InputsFormsType {
+  _id: ID!
+  id: String
+  name: String!
+  label: String!
+  icon: String!
+  placeholder: String!
+  value: String
+  hidden: Boolean
+  required: Boolean
+  type: TypeForms!
+  radios: [String!]!
+  selects: [String!]!
+  checkbox: [String!]!
+}
+
+enum TypeForms {
+  formText
+  formEmail
+  formRange
+  formRadio
+  formSelect
+  formTextarea
+  formCheckbox
+  formNumber
+  formDate
+  hidden
+}
+
+type InputsFormsMessageValuesType {
+  name: String!
+  inputID: String!
+  valueInput: String!
+  valuesInput: [String!]!
+  type: String!
+}
+
+type CrmFormObjectType {
+  url: String!
+  isFormCrm: Boolean!
+}
+
+type Forms {
+  _id: ID!
+  title: String!
+  slug: String!
+  crm: CrmFormObjectType
+  subtitle: String!
+  description: String!
+  banner: String!
+  responsive: String
+  bannerImageDetail: ImageDetailType
+  responsiveImageDetail: ImageDetailType
+  inputs: [InputsFormsType!]!
+  termsAndCondition: TermsAndConditionFormsType!
+  disabled: Boolean!
+  status: StatusItem
+  createdAt: DateTime!
+  updatedAt: DateTime!
+  deletedAt: DateTime
+}
+
+type FormsCrmDtoType {
+  url: String!
+  isFormCrm: Boolean!
+}
+
+type FormsType {
+  _id: String!
+  title: String!
+  slug: String
+  crm: FormsCrmDtoType
+  subtitle: String!
+  description: String!
+  banner: String
+  responsive: String
+  bannerImageDetail: ImageDetailType
+  responsiveImageDetail: ImageDetailType
+  inputs: [InputsFormsType!]!
+  termsAndCondition: TermsAndConditionFormsType!
+  status: StatusItem
+  disabled: Boolean!
+  createdAt: DateTime!
+}
+
+type Messages {
+  _id: ID!
+  form: String!
+  values: [InputsFormsMessageValuesType!]!
+  createdAt: DateTime!
+  updatedAt: DateTime!
+  deletedAt: DateTime
+}
+
+type MessagesPostType {
+  _id: String!
+  form: Forms!
+  values: [InputsFormsMessageValuesType!]!
+  createdAt: DateTime!
+  updatedAt: DateTime!
+  deletedAt: DateTime
+}
+
+type ButtonPopupType {
+  text: String!
+  background: String!
+  color: String!
+}
+
+type Popup {
+  _id: ID!
+  title: String!
+  excerpt: String!
+  orientation: OrientationPopup!
+  subtitle: String!
+  description: String!
+  button: ButtonPopupType!
+  background: String!
+  color: String!
+  link: String!
+  image: String!
+  active: Boolean!
+  createdAt: DateTime!
+  updatedAt: DateTime!
+  deletedAt: DateTime
+}
+
+enum OrientationPopup {
+  popupCenter
+  popupBottomLeft
+  popupBottomRight
+  popupBottomCenter
+}
+
+type AdjudicatedPictureType {
+  _id: ID!
+  image: String!
+  isCover: Boolean!
+}
+
+type Adjudicated {
+  _id: ID!
+  item_status: StatusItem
+  category: String!
+  status: TypeStatusAdjudicated!
+  name: String!
+  link: String
+  excerpt: String!
+  description: String!
+  province: String!
+  pictures: [AdjudicatedPictureType!]
+  picturesImageDetail: [ImageDetailType!]
+  price: Float!
+  address: String!
+  phone: String!
+  disabled: Boolean!
+  createdAt: DateTime!
+  updatedAt: DateTime!
+  deletedAt: DateTime
+}
+
+enum TypeStatusAdjudicated {
+  soon
+  available
+  unavailable
+}
+
+type AdjudicatedPictureTypeGroup {
+  _id: String!
+  image: String!
+  isCover: Boolean
+}
+
+type AdjudicatedProductsByGroupCategory {
+  category: Categories!
+  products: [AdjudicatedProductType!]!
+}
+
+type AdjudicatedProductType {
+  _id: String!
+  item_status: StatusItem
+  category: String!
+  status: TypeStatusAdjudicated!
+  name: String!
+  link: String
+  excerpt: String!
+  description: String!
+  province: String!
+  pictures: [AdjudicatedPictureTypeGroup!]
+  picturesImageDetail: [ImageDetailType!]
+  price: Float!
+  address: String!
+  phone: String!
+  disabled: Boolean!
+  createdAt: DateTime!
+  updatedAt: DateTime!
+  deletedAt: DateTime
+}
+
+type Prouser {
+  _id: ID!
+  title: String!
+  link: String!
+  excerpt: String!
+  slug: String
+  subtitle: String!
+  description: String!
+  category: String!
+  sections: [String!]!
+  banner: String
+  thumbnail: String
+  responsive: String
+  bannerImageDetail: ImageDetailType
+  thumbnailImageDetail: ImageDetailType
+  responsiveImageDetail: ImageDetailType
+  disabled: Boolean!
+  status: StatusItem
+  createdAt: DateTime!
+  updatedAt: DateTime!
+  deletedAt: DateTime
+}
+
+type ProuserValidateDocumentType {
+  TIPO_IDENTIFICACION: String
+  NUMERO_IDENTIFICACION: String
+  DESCRIPCION: String
+  NOMBRE: String
+  APELLIDO: String
+  FECHA: String
+  HORA: String
+  NOMBRE_DESTINATARIO: String
+  PERSONA_FIRMA: String
+  CODIGO_TIPO_IDENTIFICACION: String
+  CODIGO_VALIDACION: String
+}
+
+type ProuserByGroupType {
+  category: Categories!
+  prouser: [ProuserPostType!]!
+}
+
+type ProuserPostType {
+  _id: ID!
+  title: String!
+  slug: String
+  link: String
+  excerpt: String!
+  subtitle: String!
+  description: String!
+  category: Categories!
+  banner: String
+  thumbnail: String
+  responsive: String
+  bannerImageDetail: ImageDetailType
+  thumbnailImageDetail: ImageDetailType
+  responsiveImageDetail: ImageDetailType
+  status: StatusItem
+  disabled: Boolean
+  sections: [Sections!]!
+  createdAt: DateTime!
+}
+
+type SearchResultType {
+  _id: String!
+  text: String!
+  collection: String!
+  data: JSONObject
+}
+
+"""
+The `JSONObject` scalar type represents JSON objects as specified by [ECMA-404](http://www.ecma-international.org/publications/files/ECMA-ST/ECMA-404.pdf).
+"""
+scalar JSONObject
+
+type Channels {
+  _id: ID!
+  status: StatusItem
+  title: String!
+  slug: String!
+  excerpt: String!
+  link: String!
+  subtitle: String!
+  description: String!
+  category: ID
+  sections: [ID!]!
+  banner: String
+  thumbnail: String
+  responsive: String
+  bannerImageDetail: ImageDetailType
+  thumbnailImageDetail: ImageDetailType
+  responsiveImageDetail: ImageDetailType
+  disabled: Boolean!
+  createdAt: DateTime!
+  updatedAt: DateTime!
+  deletedAt: DateTime
+}
+
+type ChannelsByGroupType {
+  category: Categories!
+  channels: [ChannelsPostType!]!
+}
+
+type ChannelsPostType {
+  _id: ID!
+  status: StatusItem
+  title: String!
+  slug: String
+  excerpt: String!
+  subtitle: String!
+  link: String
+  description: String!
+  category: Categories!
+  banner: String
+  thumbnail: String
+  responsive: String
+  bannerImageDetail: ImageDetailType
+  thumbnailImageDetail: ImageDetailType
+  responsiveImageDetail: ImageDetailType
+  disabled: Boolean
+  sections: [Sections!]!
+  createdAt: DateTime!
+}
+
+type SeoPageMetaType {
+  title: String!
+  description: String
+  image: String
+}
+
+type SeoPage {
+  _id: ID!
+  path: String!
+  meta: SeoPageMetaType!
+  createdAt: DateTime!
+  updatedAt: DateTime!
+  deletedAt: DateTime
+}
+
+type TargetsList {
+  altTextBanner: String
+  altTextThumbnail: String
+  altTextResponsive: String
+  metaTitle: String
+  metaDescription: String
+  keywords: [String!]
+  canonicalUrl: String
+  tags: [String!]
+  ogImage: String
+  twitterImage: String
+  socialTitle: String
+  socialDescription: String
+  altText: String
+  readingTime: Float
+  robotsDirectives: String
+  language: String
+  structuredType: String
+  focusKeyword: String
+  isFeatured: Boolean
+  schemaMarkup: String
+  relatedPosts: [String!]
+  _id: String!
+  status: StatusItem
+  name: String!
+  icon: String!
+  featured: GlobalPositionsFreatured!
+  color: String!
+  description: String!
+  slug: String
+  showPosts: Boolean
+  showCategories: Boolean
+  disabled: Boolean
+  sections: [Sections!]!
+  relatedTargets: [String!]
+}
+
+type Posts {
+  _id: ID!
+  status: StatusItem
+  title: String!
+  slug: String!
+  author: ID
+  publishedAt: DateTime
+  link: String!
+  excerpt: String!
+  subtitle: String!
+  description: String!
+  category: ID!
+  sections: [ID!]!
+  targetID: ID
+  banner: String
+  thumbnail: String
+  responsive: String
+  bannerImageDetail: ImageDetailType
+  thumbnailImageDetail: ImageDetailType
+  responsiveImageDetail: ImageDetailType
+  disabled: Boolean!
+  relatedPosts: [ID!]
+  createdAt: DateTime!
+  updatedAt: DateTime!
+  deletedAt: DateTime
+}
+
+type PostsByGroupType {
+  category: Categories!
+  posts: [PostsPostType!]!
+}
+
+type PostsPostType {
+  altTextBanner: String
+  altTextThumbnail: String
+  altTextResponsive: String
+  metaTitle: String
+  metaDescription: String
+  keywords: [String!]
+  canonicalUrl: String
+  tags: [String!]
+  ogImage: String
+  twitterImage: String
+  socialTitle: String
+  socialDescription: String
+  altText: String
+  readingTime: Float
+  robotsDirectives: String
+  language: String
+  structuredType: String
+  focusKeyword: String
+  isFeatured: Boolean
+  schemaMarkup: String
+  relatedPosts: [String!]
+  _id: ID!
+  status: StatusItem
+  title: String!
+  slug: String
+  link: String
+  excerpt: String!
+  subtitle: String!
+  description: String!
+  author: String
+  publishedAt: DateTime
+  category: Categories!
+  targetID: Targets
+  banner: String
+  thumbnail: String
+  responsive: String
+  bannerImageDetail: ImageDetailType
+  thumbnailImageDetail: ImageDetailType
+  responsiveImageDetail: ImageDetailType
+  disabled: Boolean
+  sections: [Sections!]!
+  createdAt: DateTime!
+}
+
+"""Mongo ObjectId scalar type"""
+scalar ObjectId
+
+"""Fecha y hora en formato ISO8601"""
+scalar DateTime
+
+type Query {
+  users(FetchUsersArgsDto: FetchUsersArgsDto!): [User!]!
+  me: UserType!
+  findUserById(userID: String!): User!
+  sliders: [Sliders!]!
+  findSliderById(sliderID: String!): Sliders!
+  findSliderByTarget(target: String!): [Sliders!]!
+  findSliderByTargetId(targetID: String!): [Sliders!]!
+  findPromotionsByMonth(SearchArgs: SearchArgs!, FindAll: Boolean): [PromotionByMonth!]!
+  findPromotionById(PromotionID: String!): Promotions!
+  findPromotionByDate(ParamsByDate: ParamsByDate!, FindAll: Boolean): [Promotions!]!
+  findCategoryById(CategoryID: String!): CategoriesAndSubcategories!
+  findUniqueCategorySlug(Slug: String!): String!
+  findCategoryBySlug(Slug: String!): CategoriesAndSubcategories!
+  findCategoryByTarget(Target: String!, FindAll: Boolean): [CategoriesAndSubcategories!]!
+  findCategoriesByTargetId(targetID: String!, FindAll: Boolean): [CategoriesAndSubcategories!]!
+  findCategoryByParentAndTarget(ParentAndTargetDto: ParentAndTargetDto!, FindAll: Boolean): [Categories!]!
+  findCategoriesByParents(parentTarget: String!): [CategoriesByParent!]!
+  profitsGroupByCategory(FindAll: Boolean): [ProfitsGroupByCategoryDto!]!
+  findProfitById(ProfitID: String!): Profits!
+  findProfitsByCategory(categoryID: String!, FindAll: Boolean): [Profits!]!
+  findUniqueProfitSlug(Slug: String!): String!
+  episodePodcastGroupBySeason(FindAll: Boolean): [EpisodePodcastGroupBySeason!]!
+  findEpisodePodcastBySeason(seasonID: String!, FindAll: Boolean): [Podcast!]!
+  findEpisodePodcastById(episodeID: String!): Podcast!
+  findUniqueEpisodeSlug(Slug: String!): String!
+  findProductsByParentTargetCategory(ParentTarget: String!, FindAll: Boolean): [ProductsByParentTarget!]!
+  findProductsByCategory(CategoryID: String!, FindAll: Boolean): [Products!]!
+  findProductById(ProductID: String!): ProductsByParentTarget!
+  findProductBySlug(slug: String!): ProductsByParentTarget!
+  findUniqueProductSlug(Slug: String!): String!
+  coins: [Coins!]!
+  findCoinById(CoinID: String!): Coins!
+  locations: [Locations!]!
+  findLocationById(LocationID: String!): Locations!
+  findFinancially(ArgsFinancially: ArgsFinancially!, FindAll: Boolean): [FinanciallyPostType!]!
+  getFinanciallyPaginated(ArgsFinancially: ArgsFinancially!, findAll: Boolean): FinanciallyPostPagination!
+  getFinanciallyRelated(FinanciallyID: String!): [FinanciallyPostType!]!
+  getFinanciallyRecent(FinanciallyID: String!): [FinanciallyPostType!]!
+  findFinanciallyGroupByType: [FinanciallyByGroupType!]!
+  findFinanciallyById(FinanciallyID: String!): FinanciallyPostType!
+  findFinanciallyBySlug(Slug: String!): FinanciallyPostType!
+  findUniqueFinanciallySlug(Slug: String!): String!
+  findShortcutsByTarget(Target: String!): [Shortcuts!]!
+  findShortcutsByTargetId(targetId: String!): [Shortcuts!]!
+  findShortcutsGroupByTarget: [ShortcutsGroupByTarget!]!
+  findShortcutsGroupByTargetId(targetID: String!, findAll: Boolean!): [ShortcutsGroupByTarget!]!
+  findShortcutById(ShortcutID: String!): Shortcuts!
+  findShortcuts: [Shortcuts!]!
+  findRegulatoryByCategory(Category: String!, FindAll: Boolean): [RegulatoryPostType!]!
+  findRegulatory(ArgsRegulatory: ArgsRegulatory!): [RegulatoryPostType!]!
+  findRegulatoryGroupByType(FindAll: Boolean): [RegulatoryByGroupType!]!
+  findRegulatoryById(RegulatoryID: String!): RegulatoryPostType!
+  findRegulatoryBySlug(Slug: String!): RegulatoryPostType!
+  findUniqueRegulatorySlug(Slug: String!): String!
+  findBusinessByCategory(Category: String!, FindAll: Boolean): [BusinessPostType!]!
+  findBusiness(ArgsBusiness: ArgsBusiness!): [BusinessPostType!]!
+  findBusinessGroupByType(FindAll: Boolean): [BusinessByGroupType!]!
+  findBusinessById(BusinessID: String!): BusinessPostType!
+  findBusinessBySlug(Slug: String!): BusinessPostType!
+  findUniqueBusinessSlug(Slug: String!): String!
+  findEnterpriseByCategory(Category: String!, FindAll: Boolean): [EnterprisePostType!]!
+  findEnterprise(ArgsEnterprise: ArgsEnterprise!): [EnterprisePostType!]!
+  findEnterpriseGroupByType(FindAll: Boolean): [EnterpriseByGroupType!]!
+  findEnterpriseById(EnterpriseID: String!): EnterprisePostType!
+  findEnterpriseBySlug(Slug: String!): EnterprisePostType!
+  findUniqueEnterpriseSlug(Slug: String!): String!
+  findInsuranceByCategory(Category: String!, FindAll: Boolean): [InsurancePostType!]!
+  findInsurance(ArgsInsurance: ArgsInsurance!): [InsurancePostType!]!
+  findInsuranceGroupByType(FindAll: Boolean): [InsuranceByGroupType!]!
+  findInsuranceById(InsuranceID: String!): InsurancePostType!
+  findInsuranceBySlug(Slug: String!): InsurancePostType!
+  findUniqueInsuranceSlug(Slug: String!): String!
+  findForms: [FormsType!]!
+  findFormsById(FormsID: String!): FormsType!
+  findFormsBySlug(Slug: String!): FormsType!
+  findUniqueFormSlug(Slug: String!): String!
+  findMessagesAndDownloadFile(ArgsMessages: ArgsMessages!): [MessagesPostType!]!
+  findMessages(ArgsMessages: ArgsMessages!): [MessagesPostType!]!
+  findMessagesById(MessagesID: String!): MessagesPostType!
+  findPopupByActive: Popup!
+  findPopups: [Popup!]!
+  findPopupById(popupID: String!): Popup!
+  findAdjudicatedProductsGroupByCategory(FindAll: Boolean): [AdjudicatedProductsByGroupCategory!]!
+  findAdjudicated(ArgsAdjudicated: ArgsAdjudicated!): [Adjudicated!]!
+  findAdjudicatedById(AdjudicatedID: String!): Adjudicated!
+  findProuserByCategory(Category: String!, FindAll: Boolean): [ProuserPostType!]!
+  findProuserValidationDocument(DocumentNumber: String!): ProuserValidateDocumentType!
+  findProuser(ArgsProuser: ArgsProuser!): [ProuserPostType!]!
+  findProuserGroupByType(FindAll: Boolean): [ProuserByGroupType!]!
+  findProuserById(ProuserID: String!): ProuserPostType!
+  findProuserBySlug(Slug: String!): ProuserPostType!
+  findUniqueProuserSlug(Slug: String!): String!
+  search(Search: String!): [SearchResultType!]!
+  findChannelsByCategory(Category: String!, FindAll: Boolean): [ChannelsPostType!]!
+  findChannels(ArgsChannels: ArgsChannels!): [ChannelsPostType!]!
+  findChannelsGroupByType(FindAll: Boolean): [ChannelsByGroupType!]!
+  findChannelsPostPublic(FindAll: Boolean): [ChannelsPostType!]!
+  findChannelsPost(FindAll: Boolean): [ChannelsPostType!]!
+  findChannelById(ChannelID: String!): ChannelsPostType!
+  findChannelsBySlug(Slug: String!): ChannelsPostType!
+  findUniqueChannelSlug(Slug: String!): String!
+  seoPages: [SeoPage!]!
+  findSeoPageById(SeoPageId: String!): SeoPage!
+  findSeoPageByPath(Path: String!): SeoPage
+  findAllTargets(FindAll: Boolean): [TargetsList!]!
+  findTargetById(targetID: String!): TargetsList!
+  findTargetBySlug(slug: String!): TargetsList!
+  findUniqueTargetSlug(Slug: String!): String!
+  findPostsByCategory(CategoryID: String!, FindAll: Boolean): [PostsPostType!]!
+  findPostsByCategoryId(CategoryId: String!, FindAll: Boolean): [PostsPostType!]!
+  findPostsGroupByCategory(TargetId: String!, FindAll: Boolean): [PostsByGroupType!]!
+  findPostsByTargetId(TargetID: String!, FindAll: Boolean): [PostsPostType!]!
+  findPosts(ArgsPosts: ArgsPosts!): [PostsPostType!]!
+  findPostById(PostId: String!): PostsPostType!
+  findPostsBySlug(Slug: String!): PostsPostType!
+  findUniquePostsSlug(Slug: String!): String!
+}
+
+input FetchUsersArgsDto {
+  search: String! = ""
+}
+
+input SearchArgs {
+  month: String
+}
+
+input ParamsByDate {
+  search: String
+  start: String
+  end: String
+}
+
+input ParentAndTargetDto {
+  parentTarget: String
+  target: String
+}
+
+input ArgsFinancially {
+  type: String!
+  search: String!
+  page: Float
+  itemsPerPage: Float
+}
+
+input ArgsRegulatory {
+  category: String!
+  search: String!
+}
+
+input ArgsBusiness {
+  category: String!
+  search: String!
+}
+
+input ArgsEnterprise {
+  category: String!
+  search: String!
+}
+
+input ArgsInsurance {
+  category: String!
+  search: String!
+}
+
+input ArgsMessages {
+  date: DateRangeMessageInput!
+  formRef: String!
+  search: String!
+}
+
+input DateRangeMessageInput {
+  start: DateTime
+  end: DateTime
+}
+
+input ArgsAdjudicated {
+  search: String
+  category: String
+  province: String
+  priceMin: Float
+  priceMax: Float
+}
+
+input ArgsProuser {
+  category: String!
+  search: String!
+}
+
+input ArgsChannels {
+  category: String!
+  search: String!
+}
+
+input ArgsPosts {
+  category: String!
+  search: String!
+}
+
+type Mutation {
+  updateUser(UpdateUserDto: UpdateUserDto!): User!
+  createUser(CreateUserDto: CreateUserDto!): User!
+  register(CreateUserDto: CreateUserDto!): User!
+  updateSlider(UpdateSlider: UpdateSlider!): Sliders!
+  createSlider(CreateSliderDto: CreateSliderDto!): Sliders!
+  removeSlider(sliderID: String!): Sliders!
+  updateSlidersPositions(UpdatePositionsSliderDto: UpdatePositionsSliderDto!): [Sliders!]!
+  updatePromotions(UpdatePromotionDto: UpdatePromotionDto!): [Promotions!]!
+  createPromotion(CreatePromotionDto: CreatePromotionDto!): [Promotions!]!
+  clonePromotion(PromotionID: String!): Promotions!
+  publishPromotion(PromotionID: String!): Promotions!
+  draftPromotion(PromotionID: String!): Promotions!
+  removePromotions(RemovePromotionsDto: RemovePromotionsDto!): [Promotions!]!
+  removePromotion(PromotionID: String!): Promotions!
+  login(LoginDto: LoginDto!): LoginResponse!
+  updateCategories(UpdateCategoryDto: UpdateCategoryDto!): Categories!
+  createCategory(CreateCategoryDto: CreateCategoryDto!): Categories!
+  cloneCategories(CategoryID: String!): Categories!
+  publishCategory(CategoryID: String!): Categories!
+  draftCategory(CategoryID: String!): Categories!
+  removeCategories(CategoryID: String!): Categories!
+  updateProfits(UpdateProfitsDto: UpdateProfitsDto!): [Profits!]!
+  createProfit(CreateProfitDto: CreateProfitDto!): [Profits!]!
+  cloneProfits(ProfitID: String!): Profits!
+  publishProfits(ProfitID: String!): Profits!
+  draftProfits(ProfitID: String!): Profits!
+  removeProfits(ProfitID: String!): Profits!
+  updatePodcastEpisode(UpdatePodcastEpisodeDto: UpdatePodcastEpisodeDto!): Podcast!
+  createPodcastEpisode(CreateEpisodePodcastDto: CreateEpisodePodcastDto!): Podcast!
+  clonePodcast(episodeID: String!): Podcast!
+  publishPodcast(episodeID: String!): Podcast!
+  draftPodcast(episodeID: String!): Podcast!
+  removePodcast(episodeID: String!): Podcast!
+  updateProduct(UpdateProductDto: UpdateProductDto!): Products!
+  createProduct(CreateProductDto: CreateProductDto!): Products!
+  cloneProduct(ProductID: String!): Products!
+  publishProduct(ProductID: String!): Products!
+  draftProduct(ProductID: String!): Products!
+  removeProduct(ProductID: String!): Products!
+  updateCoin(UpdateCoinDto: UpdateCoinDto!): Coins!
+  removeCoin(CoinID: String!): Coins!
+  createCoin(CreateCoinDto: CreateCoinDto!): Coins!
+  updateLocation(UpdateLocationDto: UpdateLocationDto!): Locations!
+  removeLocation(LocationID: String!): Locations!
+  createLocation(CreateLocationDto: CreateLocationDto!): Locations!
+  updateFinancially(UpdateFinanciallyDto: UpdateFinanciallyDto!): Financially!
+  cloneFinancially(FinanciallyID: String!): Financially!
+  publishFinancially(FinanciallyID: String!): Financially!
+  draftFinancially(FinanciallyID: String!): Financially!
+  createFinancially(CreateFinanciallyDto: CreateFinanciallyDto!): Financially!
+  removeFinancially(FinanciallyID: String!): Financially!
+  toggleFinanciallyPin(FinanciallyID: String!): Financially!
+  updateShortcuts(UpdateShortcutsDto: UpdateShortcutsDto!): Shortcuts!
+  createShortcuts(CreateShortcutsDto: CreateShortcutsDto!): Shortcuts!
+  removeShortcuts(ShortcutsID: String!): Shortcuts!
+  updateRegulatory(UpdateRegulatoryDto: UpdateRegulatoryDto!): Regulatory!
+  createRegulatory(CreateRegulatoryDto: CreateRegulatoryDto!): Regulatory!
+  cloneRegulatory(RegulatoryID: String!): Regulatory!
+  publishRegulatory(RegulatoryID: String!): Regulatory!
+  draftRegulatory(RegulatoryID: String!): Regulatory!
+  removeRegulatory(RegulatoryID: String!): Regulatory!
+  updateBusiness(UpdateBusinessDto: UpdateBusinessDto!): Business!
+  createBusiness(CreateBusinessDto: CreateBusinessDto!): Business!
+  cloneBusiness(BusinessID: String!): Business!
+  publishBusiness(BusinessID: String!): Business!
+  draftBusiness(BusinessID: String!): Business!
+  removeBusiness(BusinessID: String!): Business!
+  updateEnterprise(UpdateEnterpriseDto: UpdateEnterpriseDto!): Enterprise!
+  createEnterprise(CreateEnterpriseDto: CreateEnterpriseDto!): Enterprise!
+  cloneEnterprise(EnterpriseID: String!): Enterprise!
+  publishEnterprise(EnterpriseID: String!): Enterprise!
+  draftEnterprise(EnterpriseID: String!): Enterprise!
+  removeEnterprise(EnterpriseID: String!): Enterprise!
+  updateInsurance(UpdateInsuranceDto: UpdateInsuranceDto!): Insurance!
+  createInsurance(CreateInsuranceDto: CreateInsuranceDto!): Insurance!
+  cloneInsurance(InsuranceID: String!): Insurance!
+  publishInsurance(InsuranceID: String!): Insurance!
+  draftInsurance(InsuranceID: String!): Insurance!
+  removeInsurance(InsuranceID: String!): Insurance!
+  updateForms(UpdateFormsDto: UpdateFormsDto!): Forms!
+  cloneForms(FormsID: String!): Forms!
+  publishForm(FormID: String!): Forms!
+  draftForm(FormID: String!): Forms!
+  createForms(CreateFormsDto: CreateFormsDto!): Forms!
+  removeForms(FormsID: String!): Forms!
+  updateMessages(UpdateMessagesDto: UpdateMessagesDto!): Messages!
+  createMessages(CreateMessagesDto: CreateMessagesDto!): Messages!
+  removeMessages(MessagesID: String!): Messages!
+  updatePopup(UpdatePopupDto: UpdatePopupDto!): Popup!
+  createPopup(CreatePopupDto: CreatePopupDto!): Popup!
+  removePopup(popupID: String!): Popup!
+  activePopup(popupID: String!): Popup!
+  updateAdjudicated(UpdateAdjudicatedDto: UpdateAdjudicatedDto!): Adjudicated!
+  cloneAdjudicated(AdjudicatedID: String!): Adjudicated!
+  publishAdjudicated(AdjudicatedID: String!): Adjudicated!
+  draftAdjudicated(AdjudicatedID: String!): Adjudicated!
+  removeAdjudicated(AdjudicatedID: String!): Adjudicated!
+  createAdjudicated(CreateAdjudicatedDto: CreateAdjudicatedDto!): Adjudicated!
+  updateProuser(UpdateProuserDto: UpdateProuserDto!): Prouser!
+  createProuser(CreateProuserDto: CreateProuserDto!): Prouser!
+  cloneProuser(ProuserID: String!): Prouser!
+  publishProuser(ProuserID: String!): Prouser!
+  draftProuser(ProuserID: String!): Prouser!
+  removeProuser(ProuserID: String!): Prouser!
+  updateChannel(UpdateChannelDto: UpdateChannelDto!): Channels!
+  createChannel(CreateChannelDto: CreateChannelDto!): Channels!
+  cloneChannel(ChannelID: String!): Channels!
+  publishChannel(ChannelID: String!): Channels!
+  draftChannel(ChannelID: String!): Channels!
+  removeChannel(ChannelID: String!): Channels!
+  updateSeoPage(UpdateSeoPageDto: UpdateSeoPageDto!): SeoPage!
+  removeSeoPage(SeoPageId: String!): SeoPage!
+  createSeoPage(CreateSeoPageDto: CreateSeoPageDto!): SeoPage!
+  createSeoPages(CreateSeoPagesDto: CreateSeoPagesDto!): SeoPage!
+  updateTarget(UpdateTargetDto: UpdateTargetDto!): Targets!
+  createTarget(CreateTargetDto: CreateTargetDto!): Targets!
+  cloneTarget(TargetID: String!): Targets!
+  publishTarget(TargetID: String!): Targets!
+  draftTarget(TargetID: String!): Targets!
+  removeTarget(TargetID: String!): Targets!
+  updatePost(UpdatePostDto: UpdatePostDto!): Posts!
+  createPost(CreatePostDto: CreatePostDto!): Posts!
+  clonePost(PostID: String!): Posts!
+  publishPost(PostID: String!): Posts!
+  draftPost(PostID: String!): Posts!
+  removePost(PostID: String!): Posts!
+}
+
+input UpdateUserDto {
+  userID: ObjectId!
+  user: UpdateUser!
+  newUploadAvatar: [UpdateUserImage!]
+}
+
+input UpdateUser {
+  firstName: String!
+  lastName: String!
+  avatar: String
+}
+
+input UpdateUserImage {
+  img: String!
+  filetype: String!
+}
+
+input CreateUserDto {
+  firstName: String!
+  lastName: String!
+  email: String!
+  birthday: DateTime!
+  password: String!
+  country: String!
+  phone: String!
+}
+
+input UpdateSlider {
+  altTextBanner: String
+  altTextThumbnail: String
+  altTextResponsive: String
+  metaTitle: String
+  metaDescription: String
+  keywords: [String!]
+  canonicalUrl: String
+  tags: [String!]
+  ogImage: String
+  twitterImage: String
+  socialTitle: String
+  socialDescription: String
+  altText: String
+  readingTime: Float
+  robotsDirectives: String
+  language: String
+  structuredType: String
+  focusKeyword: String
+  isFeatured: Boolean
+  schemaMarkup: String
+  relatedPosts: [String!]
+  _id: ObjectId!
+  title: FeaturesInput!
+  subtitle: FeaturesInput!
+  description: FeaturesInput!
+  button: FeaturesButtonInput!
+  targetID: ObjectId
+  target: TargetSliders
+  picture: String
+  responsive: String
+  pictureImageDetail: ImageDetailInputUpdate
+  responsiveImageDetail: ImageDetailInputUpdate
+  disabled: Boolean!
+  expirationDate: DateTime
+  altTextPicture: String
+  caption: String
+  order: Float
+}
+
+input FeaturesInput {
+  text: String!
+  align: String!
+  size: String!
+  color: String!
+  weight: String!
+}
+
+input FeaturesButtonInput {
+  enabled: Boolean!
+  link: String!
+  text: String!
+  align: String!
+  color: String!
+  weight: String!
+  background: String!
+}
+
+enum TargetSliders {
+  bannerHome
+  bannerProfits
+  bannerPromotions
+  bannerFinancially
+  bannerBusiness
+  bannerEnterprise
+  bannerInsurance
+  bannerProuser
+  bannerAdjudicated
+}
+
+input ImageDetailInputUpdate {
+  image: String!
+  altText: String
+  isCover: Boolean
+  deletedAt: DateTime
+  updatedAt: DateTime
+  _id: ObjectId
+}
+
+input CreateSliderDto {
+  altTextBanner: String
+  altTextThumbnail: String
+  altTextResponsive: String
+  metaTitle: String
+  metaDescription: String
+  keywords: [String!]
+  canonicalUrl: String
+  tags: [String!]
+  ogImage: String
+  twitterImage: String
+  socialTitle: String
+  socialDescription: String
+  altText: String
+  readingTime: Float
+  robotsDirectives: String
+  language: String
+  structuredType: String
+  focusKeyword: String
+  isFeatured: Boolean
+  schemaMarkup: String
+  relatedPosts: [String!]
+  title: FeaturesInput!
+  subtitle: FeaturesInput!
+  description: FeaturesInput!
+  button: FeaturesButtonInput!
+  targetID: String
+  target: TargetSliders
+  picture: String
+  responsive: String
+  pictureImageDetail: ImageDetailInput
+  responsiveImageDetail: ImageDetailInput
+  disabled: Boolean!
+  altTextPicture: String
+  caption: String
+  order: Float
+  expirationDate: DateTime
+}
+
+input ImageDetailInput {
+  image: String!
+  altText: String
+  isCover: Boolean
+  deletedAt: DateTime
+  updatedAt: DateTime
+}
+
+input UpdatePositionsSliderDto {
+  sliders: [SliderPositionInput!]!
+}
+
+input SliderPositionInput {
+  id: String!
+  position: Float
+}
+
+input UpdatePromotionDto {
+  promotions: [UpdatePromotion!]!
+}
+
+input UpdatePromotion {
+  _id: ObjectId
+  status: StatusItem
+  name: String!
+  percent: String!
+  devolution: String!
+  condition: String!
+  extract: String!
+  picture: String
+  pictureImageDetail: ImageDetailInputUpdate
+  newPicturePromotion: [UpdatePromotionImage!]
+  disabled: Boolean!
+  date: DateRangeInput!
+}
+
+input UpdatePromotionImage {
+  img: String!
+  filetype: String!
+}
+
+input DateRangeInput {
+  start: DateTime!
+  end: DateTime!
+}
+
+input CreatePromotionDto {
+  promotions: [CreatePromotion!]!
+}
+
+input CreatePromotion {
+  name: String!
+  status: StatusItem
+  percent: String!
+  devolution: String!
+  condition: String!
+  extract: String!
+  picture: [PromotionImage!]
+  pictureImageDetail: ImageDetailInput
+  disabled: Boolean!
+  date: DateRangeInput!
+}
+
+input PromotionImage {
+  img: String!
+  filetype: String!
+}
+
+input RemovePromotionsDto {
+  promotionsIDS: [ObjectId!]!
+}
+
+input LoginDto {
+  email: String!
+  password: String!
+}
+
+input UpdateCategoryDto {
+  _id: ObjectId!
+  status: StatusItem
+  name: String!
+  excerpt: String!
+  description: String!
+  slug: String!
+  tags: [String!]!
+  target: TargetCategories
+  targetID: ObjectId
+  parentID: ObjectId
+  parentTarget: TargetParentCategories
+  pictures: PicturesCategoryInputUpdate!
+  disabled: Boolean!
+}
+
+input PicturesCategoryInputUpdate {
+  responsive: String
+  banner: String
+  thumbnail: String
+  bannerImageDetail: ImageDetailInputUpdate
+  responsiveImageDetail: ImageDetailInputUpdate
+  thumbnailImageDetail: ImageDetailInputUpdate
+}
+
+input CreateCategoryDto {
+  altTextBanner: String
+  altTextThumbnail: String
+  altTextResponsive: String
+  metaTitle: String
+  metaDescription: String
+  keywords: [String!]
+  canonicalUrl: String
+  tags: [String!]!
+  ogImage: String
+  twitterImage: String
+  socialTitle: String
+  socialDescription: String
+  altText: String
+  readingTime: Float
+  robotsDirectives: String
+  language: String
+  structuredType: String
+  focusKeyword: String
+  isFeatured: Boolean
+  schemaMarkup: String
+  relatedPosts: [String!]
+  status: StatusItem
+  name: String!
+  excerpt: String!
+  description: String!
+  slug: String!
+  parentID: ObjectId
+  parentTarget: TargetParentCategories
+  target: TargetCategories
+  targetID: ObjectId
+  pictures: PicturesCategoryInput!
+  disabled: Boolean!
+  relatedCategories: [String!]
+  relatedTargets: [String!]
+  slugHistory: [String!]
+}
+
+input PicturesCategoryInput {
+  responsive: String
+  banner: String
+  thumbnail: String
+  bannerImageDetail: ImageDetailInput
+  responsiveImageDetail: ImageDetailInput
+  thumbnailImageDetail: ImageDetailInput
+}
+
+input UpdateProfitsDto {
+  profits: [UpdateProfit!]!
+}
+
+input UpdateProfit {
+  _id: ObjectId!
+  status: StatusItem
+  name: String!
+  percent: String!
+  color: String!
+  category: String!
+  description: DescriptionLargeProfitInput
+  devolution: String!
+  condition: String!
+  picture: String
+  pictureImageDetail: ImageDetailInputUpdate
+  newPictureProfit: [UpdateProfitImage!]
+  disabled: Boolean!
+  date: DateRangeProfitInput!
+}
+
+input DescriptionLargeProfitInput {
+  text: String!
+  enabled: Boolean!
+}
+
+input UpdateProfitImage {
+  img: String!
+  filetype: String!
+}
+
+input DateRangeProfitInput {
+  start: DateTime!
+  end: DateTime!
+}
+
+input CreateProfitDto {
+  profits: [CreateProfit!]!
+}
+
+input CreateProfit {
+  name: String!
+  status: StatusItem
+  percent: String!
+  color: String!
+  category: String!
+  description: DescriptionLargeProfitInput
+  devolution: String!
+  condition: String!
+  picture: [ProfitImage!]
+  pictureImageDetail: ImageDetailInput
+  disabled: Boolean!
+  date: DateRangeProfitInput!
+}
+
+input ProfitImage {
+  img: String!
+  filetype: String!
+}
+
+input UpdatePodcastEpisodeDto {
+  episodeID: ObjectId!
+  newCoverPodcast: [UpdatePodcastCover!]
+  episode: UpdatePodcastEpisode!
+}
+
+input UpdatePodcastCover {
+  img: String!
+  filetype: String!
+}
+
+input UpdatePodcastEpisode {
+  title: String!
+  season: String!
+  link: String!
+  description: String!
+  slug: String!
+  cover: String
+  coverImageDetail: ImageDetailInputUpdate
+  status: StatusItem
+  disabled: Boolean!
+}
+
+input CreateEpisodePodcastDto {
+  title: String!
+  description: String!
+  season: String!
+  slug: String!
+  status: StatusItem
+  disabled: Boolean!
+  cover: String
+  coverImageDetail: ImageDetailInput
+  link: String!
+}
+
+input UpdateProductDto {
+  productID: ObjectId!
+  product: UpdateProduct!
+}
+
+input UpdateProduct {
+  status: StatusItem
+  name: String!
+  description: String!
+  slug: String
+  category: String!
+  banner: String
+  thumbnail: String
+  responsive: String
+  bannerImageDetail: ImageDetailInputUpdate
+  thumbnailImageDetail: ImageDetailInputUpdate
+  responsiveImageDetail: ImageDetailInputUpdate
+  link: String
+  disabled: Boolean
+  sections: [SectionInputUpdate!]!
+}
+
+input SectionInputUpdate {
+  _id: ObjectId
+  name: String!
+  description: String!
+  color: String!
+  position: Float!
+  style: StyleSection
+  type: TypeSection!
+  cards: [CardsSectionInputUpdate!]
+  banner: BannerSectionInputUpdate
+  table: TableSectionInputUpdate
+  attachments: [AttachmentSectionInputUpdate!]
+  text: String
+  video: String
+  image: ImageSectionInputUpdate
+  imageDetail: ImageDetailInputUpdate
+  grids: [GridSectionInputUpdate!]
+  gallery: GallerySectionInputUpdate
+  accordion: ListSectionInputUpdate
+}
+
+input CardsSectionInputUpdate {
+  status: String
+  _id: ObjectId
+  link: String
+  name: String!
+  description: String!
+  picture: String
+  pictureImageDetail: ImageDetailInputUpdate
+  newUploadPictureItem: [SectionImage!]
+}
+
+input SectionImage {
+  img: String!
+  filetype: String!
+}
+
+input BannerSectionInputUpdate {
+  status: String
+  _id: ObjectId
+  title: TextBannerSectionInput
+  description: TextBannerSectionInput
+  background: String
+  button: ButtonBannerSectionInput!
+  picture: String
+  pictureImageDetail: ImageDetailInputUpdate
+  newUploadPictureItem: [SectionImage!]
+}
+
+input TextBannerSectionInput {
+  text: String!
+  color: String!
+}
+
+input ButtonBannerSectionInput {
+  text: String!
+  color: String!
+  link: String!
+  background: String!
+  enabled: Boolean!
+}
+
+input TableSectionInputUpdate {
+  headers: [String!]!
+  columns: [[TableColumnsSectionInput!]!]!
+}
+
+input TableColumnsSectionInput {
+  name: String!
+  value: String!
+}
+
+input AttachmentSectionInputUpdate {
+  status: String
+  _id: ObjectId
+  name: String!
+  description: String
+  file: String!
+  newUploadFileItem: [SectionFile!]
+}
+
+input SectionFile {
+  file: String!
+  filename: String!
+  filetype: String!
+}
+
+input ImageSectionInputUpdate {
+  _id: ObjectId
+  url: String!
+  newUploadPictureItem: [SectionImage!]
+}
+
+input GridSectionInputUpdate {
+  _id: ObjectId
+  layouts: [LayoutInputUpdateType!]
+  breakLine: Boolean
+  columns: Float!
+  rows: Float!
+  rowHeight: Float
+  badge: String
+  color: String
+  border: String
+  style: [GridStyle!]
+  cardSize: StyleSection
+  status: String
+}
+
+input LayoutInputUpdateType {
+  _id: ObjectId
+  i: String
+  x: Float
+  y: Float
+  w: Float
+  h: Float
+  image: String
+  imageDetail: ImageDetailInputUpdate
+  button: ButtonComponent
+  text: TextComponent
+  type: GridElementType
+  style: [GridElementStyle!]
+  status: String
+  list: [String!]
+}
+
+input ButtonComponent {
+  text: String
+  color: String
+  href: String
+  icon: String
+  picture: String
+  pictureImageDetail: ImageDetailInput
+  iconImageDetail: ImageDetailInput
+}
+
+input TextComponent {
+  text: String
+  color: String
+}
+
+input GallerySectionInputUpdate {
+  items: [GalleryItemInputUpdateType!]
+}
+
+input GalleryItemInputUpdateType {
+  _id: String
+  title: String
+  image: String
+  icon: String
+  imageDetail: ImageDetailInputUpdate
+  iconImageDetail: ImageDetailInputUpdate
+  video: String
+  status: String
+}
+
+input ListSectionInputUpdate {
+  items: [ListItemInputUpdateType!]
+}
+
+input ListItemInputUpdateType {
+  _id: String
+  title: String!
+  content: String!
+}
+
+input CreateProductDto {
+  status: StatusItem
+  name: String!
+  description: String!
+  slug: String!
+  category: String!
+  banner: String
+  thumbnail: String
+  responsive: String
+  bannerImageDetail: ImageDetailInput
+  thumbnailImageDetail: ImageDetailInput
+  responsiveImageDetail: ImageDetailInput
+  link: String
+  disabled: Boolean
+  sections: [SectionInputCreate!]!
+}
+
+input SectionInputCreate {
+  name: String!
+  description: String!
+  color: String!
+  position: Float!
+  style: StyleSection
+  type: TypeSection!
+  cards: [CardsSectionInputCreate!]
+  banner: BannerSectionInputCreate
+  table: TableSectionInputCreate
+  attachments: [AttachmentSectionInputCreate!]
+  text: String
+  video: String
+  image: ImageSectionInputCreate
+  imageDetail: ImageDetailInput
+  grids: [GridSectionInputCreate!]
+  gallery: GallerySectionInputUpdate
+  accordion: ListSectionInputUpdate
+}
+
+input CardsSectionInputCreate {
+  name: String!
+  link: String
+  description: String!
+  picture: String
+  pictureImageDetail: ImageDetailInput
+  newUploadPictureItem: [SectionImage!]
+}
+
+input BannerSectionInputCreate {
+  title: TextBannerSectionInput
+  description: TextBannerSectionInput
+  background: String
+  button: ButtonBannerSectionInput!
+  picture: String
+  pictureImageDetail: ImageDetailInput
+  newUploadPictureItem: [SectionImage!]
+}
+
+input TableSectionInputCreate {
+  headers: [String!]!
+  columns: [[TableColumnsSectionInput!]!]!
+}
+
+input AttachmentSectionInputCreate {
+  name: String!
+  description: String
+  file: String!
+  newUploadFileItem: [SectionFile!]
+}
+
+input ImageSectionInputCreate {
+  url: String!
+  newUploadPictureItem: [SectionImage!]
+}
+
+input GridSectionInputCreate {
+  layouts: [LayoutInputCreateType!]
+  breakLine: Boolean
+  columns: Float!
+  rows: Float!
+  rowHeight: Float
+  badge: String
+  color: String
+  border: String
+  style: [GridStyle!]
+  cardSize: StyleSection
+}
+
+input LayoutInputCreateType {
+  i: String
+  x: Float
+  y: Float
+  w: Float
+  h: Float
+  image: String
+  imageDetail: ImageDetailInput
+  button: ButtonComponent
+  text: TextComponent
+  type: GridElementType
+  style: [GridElementStyle!]
+  list: [String!]
+}
+
+input UpdateCoinDto {
+  coinID: ObjectId!
+  coin: UpdateCoin!
+  newUploadLogo: [CoinsPictureInputUpdate!]
+}
+
+input UpdateCoin {
+  name: String!
+  price: PriceCoinsInputUpdate!
+  prefix: String!
+  logo: String
+  logoImageDetail: ImageDetailInputUpdate
+}
+
+input PriceCoinsInputUpdate {
+  buy: String!
+  sell: String!
+}
+
+input CoinsPictureInputUpdate {
+  img: String!
+  filetype: String!
+}
+
+input CreateCoinDto {
+  name: String!
+  price: PriceCoinsInput!
+  prefix: String!
+  logo: String
+  logoImageDetail: ImageDetailInput
+}
+
+input PriceCoinsInput {
+  buy: String!
+  sell: String!
+}
+
+input UpdateLocationDto {
+  locationID: String!
+  location: UpdateLocation!
+}
+
+input UpdateLocation {
+  label: String!
+  type: TypeLocation!
+  address: String!
+  city: String!
+  latitude: String!
+  longitude: String!
+  hours: [WorkHoursRangeInput!]!
+}
+
+input WorkHoursRangeInput {
+  day: String!
+  start: String!
+  end: String!
+}
+
+input CreateLocationDto {
+  label: String!
+  type: TypeLocation!
+  address: String!
+  city: String!
+  latitude: String!
+  longitude: String!
+  hours: [WorkHoursRangeInput!]!
+}
+
+input UpdateFinanciallyDto {
+  financiallyID: ObjectId!
+  financially: UpdateFinancially!
+  newUploadBanner: [SectionImage!]!
+  newUploadThumbnail: [SectionImage!]
+  newUploadResponsive: [SectionImage!]
+  newUploadFile: [SectionFile!]!
+}
+
+input UpdateFinancially {
+  altTextBanner: String
+  altTextThumbnail: String
+  altTextResponsive: String
+  metaTitle: String
+  metaDescription: String
+  keywords: [String!]
+  canonicalUrl: String
+  tags: [String!]
+  ogImage: String
+  twitterImage: String
+  socialTitle: String
+  socialDescription: String
+  altText: String
+  readingTime: Float
+  robotsDirectives: String
+  language: String
+  structuredType: String
+  focusKeyword: String
+  isFeatured: Boolean
+  schemaMarkup: String
+  relatedPosts: [String!]
+  title: String!
+  slug: String!
+  excerpt: String!
+  subtitle: String!
+  description: String!
+  type: TypePostFinancially!
+  banner: String
+  thumbnail: String
+  responsive: String
+  bannerImageDetail: ImageDetailInputUpdate
+  thumbnailImageDetail: ImageDetailInputUpdate
+  responsiveImageDetail: ImageDetailInputUpdate
+  file: String!
+  status: StatusItem
+  disabled: Boolean
+  sections: [SectionInputUpdate!]!
+  pinnedAt: DateTime
+  authors: [AuthorInputUpdate!]
+}
+
+input AuthorInputUpdate {
+  _id: ID
+  name: String!
+  position: String
+  image: ImageDetailInputUpdate
+  socials: SocialInput
+  biography: String
+}
+
+input SocialInput {
+  x: String
+  facebook: String
+  linkedin: String
+  instagram: String
+}
+
+input CreateFinanciallyDto {
+  altTextBanner: String
+  altTextThumbnail: String
+  altTextResponsive: String
+  metaTitle: String
+  metaDescription: String
+  keywords: [String!]
+  canonicalUrl: String
+  tags: [String!]
+  ogImage: String
+  twitterImage: String
+  socialTitle: String
+  socialDescription: String
+  altText: String
+  readingTime: Float
+  robotsDirectives: String
+  language: String
+  structuredType: String
+  focusKeyword: String
+  isFeatured: Boolean
+  schemaMarkup: String
+  relatedPosts: [String!]
+  title: String!
+  slug: String!
+  subtitle: String!
+  excerpt: String!
+  description: String!
+  type: TypePostFinancially!
+  banner: [SectionImage!]
+  thumbnail: [SectionImage!]
+  responsive: [SectionImage!]
+  bannerImageDetail: ImageDetailInput
+  thumbnailImageDetail: ImageDetailInput
+  responsiveImageDetail: ImageDetailInput
+  file: [SectionFile!]
+  status: StatusItem
+  disabled: Boolean
+  sections: [SectionInputCreate!]!
+  pinnedAt: DateTime
+  authors: [AuthorInput!]
+}
+
+input AuthorInput {
+  name: String!
+  position: String
+  image: ImageDetailInput
+  socials: SocialInput
+  biography: String
+}
+
+input UpdateShortcutsDto {
+  shortcutID: ObjectId!
+  shortcut: UpdateShortcuts!
+}
+
+input UpdateShortcuts {
+  name: String!
+  icon: String
+  color: String
+  background: String
+  disabled: Boolean
+  type: TypeShortcut!
+  target: TargetShortcut
+  targetID: ObjectId
+  cards: [CardShortcutInputUpdate!]!
+}
+
+input CardShortcutInputUpdate {
+  _id: ObjectId
+  status: String
+  title: TextCardShortcutInput!
+  description: TextCardShortcutInput!
+  style: StyleCardShortcut!
+  align: StyleAlignShortcut
+  picture: String
+  pictureImageDetail: ImageDetailInputUpdate
+  newUploadPicture: [ShortcutImage!]
+  background: String!
+  button: ButtonCardShortcutInput!
+  icon: String!
+}
+
+input TextCardShortcutInput {
+  text: String!
+  color: String!
+}
+
+input ShortcutImage {
+  img: String!
+  filetype: String!
+}
+
+input ButtonCardShortcutInput {
+  text: String!
+  color: String!
+  link: String!
+  background: String!
+  enabled: Boolean!
+}
+
+input CreateShortcutsDto {
+  name: String!
+  icon: String
+  color: String
+  background: String
+  disabled: Boolean
+  type: TypeShortcut!
+  target: TargetShortcut
+  targetID: ObjectId
+  cards: [CardShortcutInputCreate!]!
+}
+
+input CardShortcutInputCreate {
+  title: TextCardShortcutInput!
+  description: TextCardShortcutInput!
+  style: StyleCardShortcut!
+  align: StyleAlignShortcut
+  picture: String
+  pictureImageDetail: ImageDetailInput
+  background: String!
+  button: ButtonCardShortcutInput!
+  icon: String!
+}
+
+input UpdateRegulatoryDto {
+  regulatoryID: ObjectId!
+  regulatory: UpdateRegulatory!
+  newUploadBanner: [SectionImage!]!
+  newUploadThumbnail: [SectionImage!]
+  newUploadResponsive: [SectionImage!]
+}
+
+input UpdateRegulatory {
+  title: String!
+  slug: String!
+  excerpt: String!
+  link: String
+  subtitle: String!
+  description: String!
+  category: String!
+  banner: String
+  thumbnail: String
+  responsive: String
+  bannerImageDetail: ImageDetailInputUpdate
+  thumbnailImageDetail: ImageDetailInputUpdate
+  responsiveImageDetail: ImageDetailInputUpdate
+  status: StatusItem
+  disabled: Boolean
+  sections: [SectionInputUpdate!]!
+}
+
+input CreateRegulatoryDto {
+  title: String!
+  slug: String!
+  subtitle: String!
+  link: String
+  excerpt: String!
+  description: String!
+  category: String!
+  banner: [SectionImage!]
+  thumbnail: [SectionImage!]
+  responsive: [SectionImage!]
+  bannerImageDetail: ImageDetailInput
+  thumbnailImageDetail: ImageDetailInput
+  responsiveImageDetail: ImageDetailInput
+  status: StatusItem
+  disabled: Boolean
+  sections: [SectionInputCreate!]!
+}
+
+input UpdateBusinessDto {
+  businessID: ObjectId!
+  business: UpdateBusiness!
+  newUploadBanner: [SectionImage!]!
+  newUploadThumbnail: [SectionImage!]
+  newUploadResponsive: [SectionImage!]
+}
+
+input UpdateBusiness {
+  title: String!
+  status: StatusItem
+  slug: String!
+  excerpt: String!
+  link: String
+  subtitle: String!
+  description: String!
+  category: String!
+  banner: String
+  thumbnail: String
+  responsive: String
+  bannerImageDetail: ImageDetailInputUpdate
+  thumbnailImageDetail: ImageDetailInputUpdate
+  responsiveImageDetail: ImageDetailInputUpdate
+  disabled: Boolean
+  sections: [SectionInputUpdate!]!
+}
+
+input CreateBusinessDto {
+  title: String!
+  status: StatusItem
+  subtitle: String!
+  slug: String!
+  link: String
+  excerpt: String!
+  description: String!
+  category: String!
+  banner: String
+  thumbnail: String
+  responsive: String
+  bannerImageDetail: ImageDetailInput
+  thumbnailImageDetail: ImageDetailInput
+  responsiveImageDetail: ImageDetailInput
+  disabled: Boolean
+  sections: [SectionInputCreate!]!
+}
+
+input UpdateEnterpriseDto {
+  enterpriseID: ObjectId!
+  enterprise: UpdateEnterprise!
+  newUploadBanner: [SectionImage!]!
+  newUploadThumbnail: [SectionImage!]
+  newUploadResponsive: [SectionImage!]
+}
+
+input UpdateEnterprise {
+  title: String!
+  status: StatusItem
+  slug: String!
+  excerpt: String!
+  link: String!
+  subtitle: String!
+  description: String!
+  category: String!
+  banner: String
+  thumbnail: String
+  responsive: String
+  bannerImageDetail: ImageDetailInputUpdate
+  thumbnailImageDetail: ImageDetailInputUpdate
+  responsiveImageDetail: ImageDetailInputUpdate
+  disabled: Boolean
+  sections: [SectionInputUpdate!]!
+}
+
+input CreateEnterpriseDto {
+  title: String!
+  status: StatusItem
+  subtitle: String!
+  slug: String!
+  excerpt: String!
+  link: String!
+  description: String!
+  category: String!
+  banner: String
+  thumbnail: String
+  responsive: String
+  bannerImageDetail: ImageDetailInput
+  thumbnailImageDetail: ImageDetailInput
+  responsiveImageDetail: ImageDetailInput
+  disabled: Boolean
+  sections: [SectionInputCreate!]!
+}
+
+input UpdateInsuranceDto {
+  insuranceID: ObjectId!
+  insurance: UpdateInsurance!
+  newUploadBanner: [SectionImage!]!
+  newUploadThumbnail: [SectionImage!]!
+  newUploadResponsive: [SectionImage!]!
+}
+
+input UpdateInsurance {
+  title: String!
+  excerpt: String!
+  subtitle: String!
+  slug: String!
+  link: String
+  description: String!
+  category: String!
+  banner: String
+  thumbnail: String
+  responsive: String
+  bannerImageDetail: ImageDetailInputUpdate
+  thumbnailImageDetail: ImageDetailInputUpdate
+  responsiveImageDetail: ImageDetailInputUpdate
+  status: StatusItem
+  disabled: Boolean
+  sections: [SectionInputUpdate!]!
+}
+
+input CreateInsuranceDto {
+  title: String!
+  subtitle: String!
+  slug: String!
+  link: String
+  excerpt: String!
+  description: String!
+  category: String!
+  banner: String
+  thumbnail: String
+  responsive: String
+  bannerImageDetail: ImageDetailInput
+  thumbnailImageDetail: ImageDetailInput
+  responsiveImageDetail: ImageDetailInput
+  status: StatusItem
+  disabled: Boolean
+  sections: [SectionInputCreate!]!
+}
+
+input UpdateFormsDto {
+  formsID: ObjectId!
+  forms: UpdateForms!
+  newUploadBanner: [SectionImage!]!
+  newUploadResponsive: [SectionImage!]
+}
+
+input UpdateForms {
+  title: String!
+  subtitle: String!
+  slug: String!
+  crm: CreateFormsCrmDto
+  description: String!
+  banner: String
+  responsive: String
+  bannerImageDetail: ImageDetailInputUpdate
+  responsiveImageDetail: ImageDetailInputUpdate
+  inputs: [InputsFormsInput!]!
+  termsAndCondition: TermsAndConditionFormsInput!
+  status: StatusItem
+  disabled: Boolean!
+}
+
+input CreateFormsCrmDto {
+  url: String!
+  isFormCrm: Boolean!
+}
+
+input InputsFormsInput {
+  _id: String
+  id: String
+  name: String!
+  required: Boolean
+  label: String!
+  icon: String!
+  placeholder: String!
+  value: String
+  hidden: Boolean
+  type: TypeForms!
+  radios: [String!]!
+  selects: [String!]!
+  checkbox: [String!]!
+}
+
+input TermsAndConditionFormsInput {
+  text: String!
+  enabled: Boolean!
+  accept: Boolean!
+}
+
+input CreateFormsDto {
+  title: String!
+  subtitle: String!
+  slug: String!
+  crm: CreateFormsCrmDto
+  description: String!
+  banner: [SectionImage!]
+  responsive: [SectionImage!]
+  bannerImageDetail: ImageDetailInput
+  responsiveImageDetail: ImageDetailInput
+  inputs: [InputsFormsInput!]!
+  termsAndCondition: TermsAndConditionFormsInput!
+  status: StatusItem
+  disabled: Boolean!
+}
+
+input UpdateMessagesDto {
+  messagesID: String!
+  messages: UpdateMessages!
+}
+
+input UpdateMessages {
+  form: String!
+  values: [InputsFormsMessageValuesInput!]!
+}
+
+input InputsFormsMessageValuesInput {
+  name: String!
+  inputID: String!
+  valueInput: String!
+  valuesInput: [String!]!
+  type: String!
+}
+
+input CreateMessagesDto {
+  createdAt: DateTime!
+  form: String!
+  values: [InputsFormsMessageValuesInput!]!
+}
+
+input UpdatePopupDto {
+  popupID: ObjectId!
+  newImagePopup: [UpdatePopupImage!]
+  popup: UpdatePopup!
+}
+
+input UpdatePopupImage {
+  img: String!
+  filetype: String!
+}
+
+input UpdatePopup {
+  title: String!
+  excerpt: String
+  subtitle: String!
+  description: String!
+  button: ButtonPopupUpdateInput!
+  background: String!
+  color: String!
+  orientation: OrientationPopup!
+  link: String!
+  image: String!
+  active: Boolean!
+}
+
+input ButtonPopupUpdateInput {
+  text: String!
+  background: String!
+  color: String!
+}
+
+input CreatePopupDto {
+  title: String!
+  excerpt: String
+  subtitle: String!
+  description: String!
+  orientation: OrientationPopup!
+  button: ButtonPopupInput
+  background: String!
+  color: String!
+  link: String!
+  image: [PopupImage!]
+  active: Boolean!
+}
+
+input ButtonPopupInput {
+  text: String!
+  background: String!
+  color: String!
+}
+
+input PopupImage {
+  img: String!
+  filetype: String!
+}
+
+input UpdateAdjudicatedDto {
+  adjudicatedID: ObjectId!
+  adjudicated: UpdateAdjudicated!
+}
+
+input UpdateAdjudicated {
+  category: String!
+  status: TypeStatusAdjudicated!
+  item_status: StatusItem
+  name: String!
+  link: String
+  excerpt: String!
+  description: String!
+  pictures: [AdjudicatedPictureInputUpdate!]!
+  picturesImageDetail: [ImageDetailInputUpdate!]!
+  price: Float!
+  address: String!
+  province: String!
+  phone: String!
+  disabled: Boolean!
+}
+
+input AdjudicatedPictureInputUpdate {
+  _id: String
+  image: String!
+  newImage: [AdjudicatedImage!]
+  isCover: Boolean!
+  action: String
+}
+
+input AdjudicatedImage {
+  img: String!
+  filetype: String!
+}
+
+input CreateAdjudicatedDto {
+  category: String!
+  item_status: StatusItem
+  status: TypeStatusAdjudicated!
+  name: String!
+  link: String
+  excerpt: String!
+  description: String!
+  pictures: [AdjudicatedPictureInput!]!
+  picturesImageDetail: [ImageDetailInput!]!
+  price: Float!
+  address: String!
+  province: String!
+  phone: String!
+  disabled: Boolean!
+}
+
+input AdjudicatedPictureInput {
+  image: [AdjudicatedImage!]!
+  isCover: Boolean!
+}
+
+input UpdateProuserDto {
+  prouserID: ObjectId!
+  prouser: UpdateProuser!
+  newUploadBanner: [SectionImage!]!
+  newUploadThumbnail: [SectionImage!]
+  newUploadResponsive: [SectionImage!]
+}
+
+input UpdateProuser {
+  title: String!
+  excerpt: String!
+  slug: String
+  subtitle: String!
+  link: String
+  description: String!
+  category: String!
+  banner: String
+  thumbnail: String
+  responsive: String
+  bannerImageDetail: ImageDetailInputUpdate
+  thumbnailImageDetail: ImageDetailInputUpdate
+  responsiveImageDetail: ImageDetailInputUpdate
+  status: StatusItem
+  disabled: Boolean
+  sections: [SectionInputUpdate!]!
+}
+
+input CreateProuserDto {
+  title: String!
+  subtitle: String!
+  link: String
+  slug: String
+  excerpt: String!
+  description: String!
+  category: String!
+  banner: String
+  thumbnail: String
+  responsive: String
+  bannerImageDetail: ImageDetailInput
+  thumbnailImageDetail: ImageDetailInput
+  responsiveImageDetail: ImageDetailInput
+  status: StatusItem
+  disabled: Boolean
+  sections: [SectionInputCreate!]!
+}
+
+input UpdateChannelDto {
+  channelID: ObjectId!
+  channel: UpdateChannel!
+  newUploadBanner: [SectionImage!]!
+  newUploadThumbnail: [SectionImage!]
+  newUploadResponsive: [SectionImage!]
+}
+
+input UpdateChannel {
+  title: String!
+  status: StatusItem
+  slug: String!
+  excerpt: String!
+  link: String!
+  subtitle: String!
+  description: String!
+  category: String
+  banner: String
+  thumbnail: String
+  responsive: String
+  bannerImageDetail: ImageDetailInputUpdate
+  thumbnailImageDetail: ImageDetailInputUpdate
+  responsiveImageDetail: ImageDetailInputUpdate
+  disabled: Boolean
+  sections: [SectionInputUpdate!]!
+}
+
+input CreateChannelDto {
+  title: String!
+  status: StatusItem
+  subtitle: String!
+  slug: String!
+  excerpt: String!
+  link: String!
+  description: String!
+  category: String
+  banner: String
+  thumbnail: String
+  responsive: String
+  bannerImageDetail: ImageDetailInput
+  thumbnailImageDetail: ImageDetailInput
+  responsiveImageDetail: ImageDetailInput
+  disabled: Boolean
+  sections: [SectionInputCreate!]!
+}
+
+input UpdateSeoPageDto {
+  _id: ObjectId!
+  path: String!
+  meta: SeoPageMetaInputUpdate!
+}
+
+input SeoPageMetaInputUpdate {
+  title: String!
+  description: String
+  image: String
+}
+
+input CreateSeoPageDto {
+  path: String!
+  meta: SeoPageMetaInput!
+}
+
+input SeoPageMetaInput {
+  title: String!
+  description: String
+  image: String
+}
+
+input CreateSeoPagesDto {
+  pages: [CreateSeoPageDto!]!
+}
+
+input UpdateTargetDto {
+  targetID: String!
+  target: UpdateTarget!
+}
+
+input UpdateTarget {
+  altTextBanner: String
+  altTextThumbnail: String
+  altTextResponsive: String
+  metaTitle: String
+  metaDescription: String
+  keywords: [String!]
+  canonicalUrl: String
+  tags: [String!]
+  ogImage: String
+  twitterImage: String
+  socialTitle: String
+  socialDescription: String
+  altText: String
+  readingTime: Float
+  robotsDirectives: String
+  language: String
+  structuredType: String
+  focusKeyword: String
+  isFeatured: Boolean
+  schemaMarkup: String
+  relatedPosts: [String!]
+  status: StatusItem
+  name: String!
+  icon: String!
+  color: String!
+  featured: GlobalPositionsFreatured!
+  description: String!
+  slug: String
+  showPosts: Boolean
+  showCategories: Boolean
+  disabled: Boolean
+  sections: [SectionInputUpdate!]!
+  relatedTargets: [String!]
+}
+
+input CreateTargetDto {
+  altTextBanner: String
+  altTextThumbnail: String
+  altTextResponsive: String
+  metaTitle: String
+  metaDescription: String
+  keywords: [String!]
+  canonicalUrl: String
+  tags: [String!]
+  ogImage: String
+  twitterImage: String
+  socialTitle: String
+  socialDescription: String
+  altText: String
+  readingTime: Float
+  robotsDirectives: String
+  language: String
+  structuredType: String
+  focusKeyword: String
+  isFeatured: Boolean
+  schemaMarkup: String
+  relatedPosts: [String!]
+  status: StatusItem
+  name: String!
+  icon: String!
+  color: String!
+  featured: GlobalPositionsFreatured!
+  description: String!
+  slug: String!
+  showPosts: Boolean
+  showCategories: Boolean
+  disabled: Boolean
+  sections: [SectionInputCreate!]!
+  relatedTargets: [String!]
+}
+
+input UpdatePostDto {
+  postID: ObjectId!
+  post: UpdatePost!
+  newUploadBanner: [SectionImage!]!
+  newUploadThumbnail: [SectionImage!]
+  newUploadResponsive: [SectionImage!]
+}
+
+input UpdatePost {
+  altTextBanner: String
+  altTextThumbnail: String
+  altTextResponsive: String
+  metaTitle: String
+  metaDescription: String
+  keywords: [String!]
+  canonicalUrl: String
+  tags: [String!]
+  ogImage: String
+  twitterImage: String
+  socialTitle: String
+  socialDescription: String
+  altText: String
+  readingTime: Float
+  robotsDirectives: String
+  language: String
+  structuredType: String
+  focusKeyword: String
+  isFeatured: Boolean
+  schemaMarkup: String
+  relatedPosts: [String!]
+  title: String!
+  status: StatusItem
+  slug: String!
+  excerpt: String!
+  link: String
+  subtitle: String!
+  description: String!
+  author: String
+  publishedAt: DateTime
+  category: String!
+  banner: String
+  thumbnail: String
+  responsive: String
+  bannerImageDetail: ImageDetailInputUpdate
+  thumbnailImageDetail: ImageDetailInputUpdate
+  responsiveImageDetail: ImageDetailInputUpdate
+  disabled: Boolean
+  sections: [SectionInputUpdate!]!
+}
+
+input CreatePostDto {
+  altTextBanner: String
+  altTextThumbnail: String
+  altTextResponsive: String
+  metaTitle: String
+  metaDescription: String
+  keywords: [String!]
+  canonicalUrl: String
+  tags: [String!]
+  ogImage: String
+  twitterImage: String
+  socialTitle: String
+  socialDescription: String
+  altText: String
+  readingTime: Float
+  robotsDirectives: String
+  language: String
+  structuredType: String
+  focusKeyword: String
+  isFeatured: Boolean
+  schemaMarkup: String
+  relatedPosts: [String!]
+  title: String!
+  status: StatusItem
+  subtitle: String!
+  slug: String!
+  link: String
+  excerpt: String!
+  author: String
+  publishedAt: DateTime
+  description: String!
+  category: String!
+  banner: [SectionImage!]
+  thumbnail: [SectionImage!]
+  responsive: [SectionImage!]
+  bannerImageDetail: ImageDetailInput
+  thumbnailImageDetail: ImageDetailInput
+  responsiveImageDetail: ImageDetailInput
+  disabled: Boolean
+  sections: [SectionInputCreate!]!
+}
